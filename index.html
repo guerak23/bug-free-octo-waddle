@@ -1,441 +1,873 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TB TOGETHER SOCIAL | Premium Social Media & Design</title>
-    
-    <!-- Meta Tags for SEO -->
-    <meta name="description" content="TB Together Social - Premium social media management, graphic design, and logo design services. We build authentic brand stories that drive real results.">
+    <title>tbtsocial. — AI-Native Content Operations Platform</title>
+    <meta name="description" content="tbtsocial — AI-Native Content Operations Platform. Crisp Minimal Light Mode inspired by Apple & Framer with precision Cobalt Blue accents.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        surface: {
+                            DEFAULT: '#F8FAFC',
+                            subtle: '#F1F5F9',
+                            card: '#FFFFFF',
+                            border: '#E2E8F0',
+                            ink: '#0F172A',
+                            muted: '#64748B',
+                        },
+                        cobalt: {
+                            50: '#EFF6FF',
+                            100: '#DBEAFE',
+                            500: '#3B82F6',
+                            600: '#2563EB', // Primary Accent
+                            700: '#1D4ED8',
+                            800: '#1E40AF',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    keyframes: {
+                        marquee: {
+                            from: { transform: 'translateX(0%)' },
+                            to: { transform: 'translateX(-50%)' }
+                        }
+                    },
+                    animation: {
+                        marquee: 'marquee 28s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Limelight Nav Glow */
+        .limelight-pill {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* 3D Services Card spotlight border effect */
+        .card-spotlight {
+            position: relative;
+            background: #FFFFFF;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+        }
+        .card-spotlight:hover {
+            box-shadow: 0 25px 45px -10px rgba(37, 99, 235, 0.12), 0 10px 20px -5px rgba(15, 23, 42, 0.04);
+            transform: translateY(-4px);
+        }
+        .card-spotlight::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 1rem;
+            padding: 1px;
+            background: radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(37, 99, 235, 0.5), transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .card-spotlight:hover::before {
+            opacity: 1;
+        }
+
+        /* CSS Link animation */
+        .css-link-hover {
+            position: relative;
+        }
+        .css-link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: #2563EB;
+            transition: width 0.3s ease;
+        }
+        .css-link-hover:hover::after {
+            width: 100%;
+        }
+
+        /* Floating Dock Magnification physics */
+        .dock-item {
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: #F8FAFC; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563EB; }
+    </style>
 </head>
-<body>
+<body class="relative">
 
-    <!-- Divine Background Elements -->
-    <div class="light-spot light-spot-1"></div>
-    <div class="light-spot light-spot-2"></div>
+    <!-- 1. Wave Background Canvas (Crisp Porcelain & Soft Light Gray/Cobalt Ribbons) -->
+    <canvas id="waveCanvas" class="fixed inset-0 pointer-events-none z-0 w-full h-full"></canvas>
+    
+    <!-- Clean Dot Grid Texture -->
+    <div class="fixed inset-0 pointer-events-none z-0 opacity-40"
+         style="background-image: radial-gradient(#CBD5E1 1px, transparent 1px); background-size: 28px 28px;">
+    </div>
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-follower"></div>
-
-    <!-- Navigation -->
-    <nav id="navbar">
-        <a href="#hero" class="nav-logo">TB <span>TOGETHER</span> SOCIAL</a>
-        <div class="nav-links">
-            <a href="#about" data-en="About Us" data-tr="Hakkımızda">About Us</a>
-            <a href="#services" data-en="Services" data-tr="Hizmetler">Services</a>
-            <a href="#references" data-en="References" data-tr="Referanslar">References</a>
-            <a href="#contact" data-en="Contact" data-tr="İletişim">Contact</a>
-        </div>
-        <div class="nav-right">
-            <div class="language-switcher">
-                <button class="lang-btn active" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="tr">TR</button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <h1 data-en="Crafting Mythical Brands in the Digital Age" data-tr="Dijital Çağda Mitolojik Markalar İnşa Ediyoruz">Crafting Mythical Brands in the Digital Age</h1>
-            <p data-en="Premium social media management, graphic design, and logo solutions for brands that dare to lead." data-tr="Liderlik etmeye cesaret eden markalar için premium sosyal medya yönetimi, grafik tasarım ve logo çözümleri.">Premium social media management, graphic design, and logo solutions for brands that dare to lead.</p>
-            <div class="hero-buttons">
-                <a href="https://cal.com/tbtsocial/30min" class="btn-primary" data-en="Start Your Legend" data-tr="Efsanenizi Başlatın">Start Your Legend</a>
-                <a href="#process" class="btn-secondary" data-en="Explore Our Art" data-tr="Sanatımızı Keşfedin">Explore Our Art</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Logos Section (Social Proof) -->
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <h2 class="reveal" data-en="Our Divine Services" data-tr="İlahi Hizmetlerimiz">Our Divine Services</h2>
-            <p class="reveal" data-en="We offer a suite of high-end digital services designed to elevate your brand into the realm of legends. From meticulous social media management to masterful visual storytelling, our approach is as grand as it is precise." data-tr="Markanızı efsaneler alemine yükseltmek için tasarlanmış bir dizi üst düzey dijital hizmet sunuyoruz. Titiz sosyal medya yönetiminden usta görsel hikaye anlatımına kadar yaklaşımımız hassas olduğu kadar görkemlidir.">We offer a suite of high-end digital services designed to elevate your brand into the realm of legends. From meticulous social media management to masterful visual storytelling, our approach is as grand as it is precise.</p>
-            <div class="services-grid">
-                <!-- Social Media -->
-                <div class="service-card reveal">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12s4.48 10 10 10 10-4.48 10-10z"></path><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                    </div>
-                    <h3 data-en="Social Media Management" data-tr="Sosyal Medya Yönetimi">Social Media Management</h3>
-                    <p data-en="Strategic stewardship of your digital presence across all realms." data-tr="Dijital varlığınızın tüm mecralarda stratejik yönetimi.">Strategic stewardship of your digital presence across all realms.</p>
+    <!-- 2. Limelight Top Navigation (Apple/Framer Frosted Glass Style) -->
+    <header class="fixed top-5 left-0 right-0 z-50 flex justify-center px-4">
+        <nav id="limelightNav" class="relative flex items-center justify-between gap-6 rounded-full border border-slate-200/80 bg-white/80 px-5 py-2.5 backdrop-blur-xl shadow-[0_4px_25px_rgba(15,23,42,0.06)] max-w-4xl w-full">
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center gap-2 group">
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0F172A] text-white shadow-sm transition-transform group-hover:scale-105">
+                    <svg class="h-4 w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                 </div>
+                <span class="text-base font-bold tracking-tight text-[#0F172A]">
+                    tbtsocial<span class="text-blue-600">.</span>
+                </span>
+            </a>
 
-                <!-- Web Site Advertising -->
-                <div class="service-card reveal">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" fill="none" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line><line x1="12" y1="21" x2="12" y2="17"></line><line x1="7" y1="21" x2="17" y2="21"></line></svg>
-                    </div>
-                    <h3 data-en="Web Site Advertising" data-tr="Web Sitesi Reklamcılığı">Web Site Advertising</h3>
-                    <p data-en="Masterful digital campaigns that drive conversion and growth." data-tr="Dönüşüm ve büyüme sağlayan usta dijital kampanyalar.">Masterful digital campaigns that drive conversion and growth.</p>
-                </div>
-
-                <!-- Graphic Design -->
-                <div class="service-card reveal">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.5 1.5"></path><path d="M7.11 7.11l5.47 1.1"></path><path d="M11 11l.29 2.12"></path></svg>
-                    </div>
-                    <h3 data-en="Graphic Design" data-tr="Grafik Tasarım">Grafik Tasarım</h3>
-                    <p data-en="Exquisite visuals that define your brand's artistic identity." data-tr="Markanızın artistik kimliğini tanımlayan enfes görseller.">Exquisite visuals that define your brand's artistic identity.</p>
-                </div>
-
-                <!-- Logo & Identity -->
-                <div class="service-card reveal">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                    </div>
-                    <h3 data-en="Logo & Identity" data-tr="Logo & Kimlik">Logo & Identity</h3>
-                    <p data-en="Crafting symbols that stand the test of time." data-tr="Zamana meydan okuyan semboller inşa ediyoruz.">Crafting symbols that stand the test of time.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Logos Section (References) -->
-    <section class="logos" id="references">
-        <h2 class="reveal" data-en="Trusted By Legends" data-tr="Referanslarımız">Trusted By Legends</h2>
-        <div class="logo-scroll">
-            <div class="logo-wrapper"><img src="logo.jpg" alt="Legend Logo 1"></div>
-            <div class="logo-wrapper"><img src="logo2.jpg" alt="Legend Logo 2"></div>
-            <div class="logo-wrapper"><img src="logo3.jpg" alt="Legend Logo 3"></div>
-            <div class="logo-wrapper"><img src="logo4.jpg" alt="Legend Logo 4"></div>
-            
-            <div class="logo-wrapper"><img src="logo.jpg" alt="Legend Logo 1"></div>
-            <div class="logo-wrapper"><img src="logo2.jpg" alt="Legend Logo 2"></div>
-            <div class="logo-wrapper"><img src="logo3.jpg" alt="Legend Logo 3"></div>
-            <div class="logo-wrapper"><img src="logo4.jpg" alt="Legend Logo 4"></div>
-            
-            <div class="logo-wrapper"><img src="logo.jpg" alt="Legend Logo 1"></div>
-            <div class="logo-wrapper"><img src="logo2.jpg" alt="Legend Logo 2"></div>
-            <div class="logo-wrapper"><img src="logo3.jpg" alt="Legend Logo 3"></div>
-            <div class="logo-wrapper"><img src="logo4.jpg" alt="Legend Logo 4"></div>
-
-            <div class="logo-wrapper"><img src="logo.jpg" alt="Legend Logo 1"></div>
-            <div class="logo-wrapper"><img src="logo2.jpg" alt="Legend Logo 2"></div>
-            <div class="logo-wrapper"><img src="logo3.jpg" alt="Legend Logo 3"></div>
-            <div class="logo-wrapper"><img src="logo4.jpg" alt="Legend Logo 4"></div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats reveal">
-        <div class="container">
-            <h2 data-en="By the Numbers" data-tr="Rakamlarla Biz">By the Numbers</h2>
-            <div class="stats-grid">
-                <div class="stat-card reveal">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label" data-en="Strategies Developed" data-tr="Geliştirilen Strateji">Strategies Developed</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-number">1K+</div>
-                    <div class="stat-label" data-en="Visuals Created" data-tr="Oluşturulan Görsel">Visuals Created</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label" data-en="Creative Ideas" data-tr="Yaratıcı Fikir">Creative Ideas</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Creation Journey (Step by Step) -->
-    <section class="process" id="process">
-        <div class="container">
-            <div class="filigree-divider"></div>
-            <h2 class="reveal" data-en="The Creation Journey" data-tr="Yaratım Yolculuğu">The Creation Journey</h2>
-            
-            <div class="step-container">
-                <div class="step-line">
-                    <div class="step-progress"></div>
-                </div>
-
-                <!-- Step 1 -->
-                <div class="step-item reveal">
-                    <div class="step-number">I</div>
-                    <div class="step-content">
-                        <h3 data-en="Mythical Discovery" data-tr="Mitolojik Keşif">Mythical Discovery</h3>
-                        <p data-en="We dive deep into your brand's DNA to uncover its legendary potential." data-tr="Markanızın efsanevi potansiyelini ortaya çıkarmak için DNA'sına derinlemesine dalıyoruz.">We dive deep into your brand's DNA to uncover its legendary potential.</p>
-                        <ul class="reveal">
-                            <li data-en="Brand DNA Analysis" data-tr="Marka DNA Analizi">Brand DNA Analysis</li>
-                            <li data-en="Target Audience Archetypes" data-tr="Hedef Kitle Arketipleri">Target Audience Archetypes</li>
-                        </ul>
-                    </div>
-                    <div class="step-visual">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Pillar Capital -->
-                            <path d="M20 22H44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M22 26H42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <!-- Pillar Shaft -->
-                            <path d="M24 26V48" stroke="currentColor" stroke-width="1.5"/>
-                            <path d="M29 26V48" stroke="currentColor" stroke-width="1"/>
-                            <path d="M35 26V48" stroke="currentColor" stroke-width="1"/>
-                            <path d="M40 26V48" stroke="currentColor" stroke-width="1.5"/>
-                            <!-- Pillar Base -->
-                            <path d="M20 48H44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M16 52H48" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            <!-- Sparkle above -->
-                            <path d="M32 6V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M27 11H37" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <circle cx="32" cy="11" r="1.5" fill="currentColor"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="step-item reveal">
-                    <div class="step-number">II</div>
-                    <div class="step-content">
-                        <h3 data-en="Artistic Vision" data-tr="Sanatsal Vizyon">Artistic Vision</h3>
-                        <p data-en="Crafting the visual identity and storytelling that will resonate through time." data-tr="Zamanın ötesinde yankılanacak görsel kimliği ve hikaye anlatımını kurguluyoruz.">Crafting the visual identity and storytelling that will resonate through time.</p>
-                        <ul class="reveal">
-                            <li data-en="Classical yet Modern Design" data-tr="Klasik ama Modern Tasarım">Classical yet Modern Design</li>
-                            <li data-en="Content Legend Planning" data-tr="İçerik Efsanesi Planlama">Content Legend Planning</li>
-                        </ul>
-                    </div>
-                    <div class="step-visual">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Lyre frame -->
-                            <path d="M18 16C18 36 14 48 32 48C50 48 46 36 46 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M14 16H50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <!-- Decorative horns -->
-                            <path d="M18 16C18 12 16 10 14 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M46 16C46 12 48 10 50 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <!-- Strings -->
-                            <line x1="25" y1="16" x2="25" y2="47" stroke="currentColor" stroke-width="1.2"/>
-                            <line x1="32" y1="16" x2="32" y2="48" stroke="currentColor" stroke-width="1.2"/>
-                            <line x1="39" y1="16" x2="39" y2="47" stroke="currentColor" stroke-width="1.2"/>
-                            <!-- Base pedestal -->
-                            <path d="M26 48L28 54H36L38 48" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                            <path d="M24 54H40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="step-item reveal">
-                    <div class="step-number">III</div>
-                    <div class="step-content">
-                        <h3 data-en="Divine Launch" data-tr="İlahi Lansman">Divine Launch</h3>
-                        <p data-en="Your brand enters the digital arena with power and precision." data-tr="Markanız dijital arenaya güç ve hassasiyetle giriş yapar.">Your brand enters the digital arena with power and precision.</p>
-                        <ul class="reveal">
-                            <li data-en="Strategic Posting" data-tr="Stratejik Paylaşım">Strategic Posting</li>
-                            <li data-en="Engagement Management" data-tr="Etkileşim Yönetimi">Engagement Management</li>
-                        </ul>
-                    </div>
-                    <div class="step-visual">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Outer celestial circle -->
-                            <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>
-                            <!-- Inner detailed circle -->
-                            <circle cx="32" cy="32" r="18" stroke="currentColor" stroke-width="1.2"/>
-                            <!-- Compass Points (North Star) -->
-                            <path d="M32 8L35 24L32 27L29 24L32 8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                            <path d="M32 56L29 40L32 37L35 40L32 56Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                            <path d="M56 32L40 35L37 32L40 29L56 32Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                            <path d="M8 32L24 29L27 32L24 35L8 32Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                            <!-- Central Core -->
-                            <circle cx="32" cy="32" r="3" fill="currentColor"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="step-item reveal">
-                    <div class="step-number">IV</div>
-                    <div class="step-content">
-                        <h3 data-en="Eternal Growth" data-tr="Sonsuz Büyüme">Eternal Growth</h3>
-                        <p data-en="Continuous optimization to ensure your brand's legacy grows daily." data-tr="Markanızın mirasının her gün büyümesini sağlamak için sürekli optimizasyon.">Continuous optimization to ensure your brand's legacy grows daily.</p>
-                        <ul class="reveal">
-                            <li data-en="Performance Analytics" data-tr="Performans Analizi">Performance Analytics</li>
-                            <li data-en="Strategic Evolution" data-tr="Stratejik Gelişim">Strategic Evolution</li>
-                        </ul>
-                    </div>
-                    <div class="step-visual">
-                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Laurel Wreath Left Side -->
-                            <path d="M18 48C12 40 12 24 20 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <!-- Leaves Left -->
-                            <path d="M12 42C10 40 12 36 15 38C15 38 14 44 12 42Z" fill="currentColor"/>
-                            <path d="M11 32C9 30 11 26 14 28C14 28 13 34 11 32Z" fill="currentColor"/>
-                            <path d="M13 22C12 20 15 16 17 19C17 19 15 24 13 22Z" fill="currentColor"/>
-                            <path d="M18 14C17 12 20 9 22 12C22 12 20 17 18 14Z" fill="currentColor"/>
-                            
-                            <!-- Laurel Wreath Right Side -->
-                            <path d="M46 48C52 40 52 24 44 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <!-- Leaves Right -->
-                            <path d="M52 42C54 40 52 36 49 38C49 38 50 44 52 42Z" fill="currentColor"/>
-                            <path d="M53 32C55 30 53 26 50 28C50 28 51 34 53 32Z" fill="currentColor"/>
-                            <path d="M51 22C52 20 49 16 47 19C47 19 49 24 51 22Z" fill="currentColor"/>
-                            <path d="M46 14C47 12 44 9 42 12C42 12 44 17 46 14Z" fill="currentColor"/>
-
-                            <!-- Stem connection -->
-                            <path d="M28 50C30 52 34 52 36 50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-
-                            <!-- Growing Sprout in the center -->
-                            <path d="M32 46V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M32 34C35 32 38 32 38 32" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                            <path d="M32 28C29 26 26 26 26 26" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Us Section -->
-    <section class="team" id="about">
-        <div class="container">
-            <div class="about-header reveal">
-                <h2 data-en="The Legend of TB Together" data-tr="TB Together Efsanesi">TB Together Efsanesi</h2>
-                <div class="about-story">
-                    <p class="lead reveal" data-en="We don't just manage social media; we craft digital legends." data-tr="Sadece sosyal medya yönetmiyoruz; dijital efsaneler inşa ediyoruz.">We don't just manage social media; we craft digital legends.</p>
-                    <p class="reveal" data-en="Founded on the intersection of classical art and modern digital strategy, TB Together Social was born from a vision to elevate brands beyond the noise of the digital age. Our approach blends mythological depth with data-driven precision, ensuring every brand we touch leaves an eternal mark." data-tr="Klasik sanat ve modern dijital stratejinin kesişim noktasında kurulan TB Together Social, markaları dijital çağın gürültüsünün ötesine taşıma vizyonuyla doğdu. Yaklaşımımız, mitolojik derinliği veri odaklı hassasiyetle harmanlayarak dokunduğumuz her markanın kalıcı bir iz bırakmasını sağlar.">Founded on the intersection of classical art and modern digital strategy, TB Together Social was born from a vision to elevate brands beyond the noise of the digital age. Our approach blends mythological depth with data-driven precision, ensuring every brand we touch leaves an eternal mark.</p>
-                </div>
+            <!-- Links with Limelight Glow Slider -->
+            <div class="hidden md:flex items-center gap-1 relative" id="navLinksContainer">
+                <div id="limelightSpotlight" class="absolute h-8 rounded-full bg-slate-100 border border-slate-200 -z-10 opacity-0 limelight-pill pointer-events-none"></div>
+                <a href="#features" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-600 hover:text-slate-900 transition-colors">Features</a>
+                <a href="#integrations" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-600 hover:text-slate-900 transition-colors">Integrations</a>
+                <a href="#pipeline" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-600 hover:text-slate-900 transition-colors">Pipeline</a>
+                <a href="#about" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-600 hover:text-slate-900 transition-colors">About</a>
             </div>
 
-            <h3 class="reveal" style="text-align: center; margin: 60px 0 40px; font-family: 'Cinzel', serif;" data-en="The Visionaries" data-tr="Vizyonerler">The Visionaries</h3>
-            <div class="team-grid">
-                <div class="team-card reveal">
-                    <div class="team-image" style="background-image: url('burak.jpeg'); background-size: cover; background-position: center;"></div>
-                    <div class="team-name">Burak Fidan</div>
-                    <div class="team-role" data-en="Founder" data-tr="Kurucu">Founder</div>
-                </div>
+            <!-- CTA Button -->
+            <div class="flex items-center gap-3">
+                <a href="https://cal.com/tbtsocial/30min" target="_blank" class="relative group inline-flex items-center gap-1.5 overflow-hidden rounded-full bg-[#0F172A] px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-blue-600 hover:shadow-md">
+                    <span>Request Demo</span>
+                    <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
             </div>
-        </div>
-    </section>
+        </nav>
+    </header>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="reveal" data-en="Contact Us" data-tr="İletişim">Contact Us</h2>
-            <div class="contact-grid reveal">
-                <div class="contact-info">
-                    <div class="wax-seal">TB</div>
-                    <h3 data-en="Ready to Start Your Legend?" data-tr="Efsanenize Başlamaya Hazır Mısınız?">Ready to Start Your Legend?</h3>
-                    <p data-en="Contact us via Phone, WhatsApp or Mail to begin your journey." data-tr="Yolculuğunuza başlamak için Telefon, WhatsApp veya Mail yoluyla bizimle iletişime geçin.">Contact us via Phone, WhatsApp or Mail to begin your journey.</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <span class="label" data-en="Phone:" data-tr="Telefon:">Phone:</span>
-                            <a href="tel:05340637353">0534 063 73 53</a>
+    <!-- Main Content Area -->
+    <main class="relative z-10 w-full">
+
+        <!-- 3. Hero Section (Crisp Minimal Light Mode) -->
+        <section id="hero" class="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-20 px-4 text-center">
+            <div class="max-w-5xl mx-auto">
+                <!-- Marketing Badge (Humanized) -->
+                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-3.5 py-1 text-xs font-semibold text-blue-700 backdrop-blur-md mb-6 shadow-sm">
+                    <span class="relative flex h-2 w-2">
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-blue-600"></span>
+                    </span>
+                    <span>Dijital Ajanslar İçin &middot; Claude 3.5 &amp; Make.com Entegrasyonu</span>
+                </div>
+
+                <!-- Headline (Humanized & Punchy) -->
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#0F172A] leading-[1.1] mb-6">
+                    Senaryoları elle yazmayı bırakın.<br>
+                    <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
+                        Haftada 30 videoyu AI ile yayına alın.
+                    </span>
+                </h1>
+
+                <!-- Subheadline (Humanized, Concrete) -->
+                <p class="mx-auto max-w-2xl text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed mb-10 font-normal">
+                    Canlı sosyal medya trendlerini Claude&apos;a bağlayın, ElevenLabs ile seslendirin ve Trello panonuzdan tek tıkla onaylayıp paylaşın. Boş ekran başında vakit kaybetmeye son.
+                </p>
+
+                <!-- Glowing Download CTA -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 rounded-2xl bg-blue-600/20 opacity-0 blur-lg transition duration-300 group-hover:opacity-100"></div>
+                        <button id="ctaDownloadBtn" class="relative flex items-center justify-center gap-3 overflow-hidden rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 min-w-[250px] hover:bg-blue-700 hover:scale-[1.01]">
+                            <div id="ctaProgressFill" class="absolute left-0 top-0 bottom-0 bg-white/20 w-0 transition-all duration-100"></div>
+                            <span id="ctaBtnContent" class="relative z-10 flex items-center gap-2.5 text-sm md:text-base font-semibold">
+                                <svg class="h-4 w-4 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                                <span>Request API Access</span>
+                                <svg class="h-4 w-4 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg>
+                            </span>
+                        </button>
+                    </div>
+
+                    <a href="#pipeline" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-4 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:bg-slate-50 hover:border-slate-400">
+                        <svg class="h-4 w-4 text-blue-600 fill-blue-600" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <span>Explore Automations</span>
+                    </a>
+                </div>
+
+                <!-- Interactive Dashboard Preview Card (Crisp White Card with Soft Shadows) -->
+                <div class="relative mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.08)] text-left">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+                        <div class="flex items-center gap-2">
+                            <div class="flex gap-1.5">
+                                <div class="h-3 w-3 rounded-full bg-slate-200"></div>
+                                <div class="h-3 w-3 rounded-full bg-slate-200"></div>
+                                <div class="h-3 w-3 rounded-full bg-slate-200"></div>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 ml-2">tbtsocial-engine://pipeline/live</span>
                         </div>
-
-                        <div class="contact-item">
-                            <span class="label" data-en="Email:" data-tr="E-posta:">Email:</span>
-                            <a href="mailto:contact@socialtbt.com.tr">contact@socialtbt.com.tr</a>
+                        <div class="flex items-center gap-2">
+                            <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
+                            <span class="text-xs font-mono font-medium text-emerald-600">Claude 3.5 Connected</span>
                         </div>
                     </div>
 
-                    <div class="contact-methods">
-                        <a href="https://wa.me/905340637353" class="contact-btn wa">WhatsApp</a>
-                        <a href="mailto:contact@socialtbt.com.tr" class="contact-btn mail" data-en="Send Mail" data-tr="Mail Gönder">Send Mail</a>
+                    <!-- Steps Tabs -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                        <button onclick="setTab(1)" id="tab1" class="rounded-xl border border-blue-600/30 bg-blue-50/60 p-3.5 text-left transition-all">
+                            <div class="flex items-center justify-between text-xs font-semibold text-blue-700 mb-1">
+                                <span>1. Signal Ingestion</span>
+                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                            </div>
+                            <div class="text-xs text-slate-700 font-mono">+14 viral trends captured</div>
+                        </button>
+                        <button onclick="setTab(2)" id="tab2" class="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-left transition-all hover:bg-slate-100/50">
+                            <div class="flex items-center justify-between text-xs font-semibold text-slate-600 mb-1">
+                                <span>2. Claude Scripting</span>
+                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+                            </div>
+                            <div class="text-xs text-slate-500 font-mono">Script generated &amp; synced</div>
+                        </button>
+                        <button onclick="setTab(3)" id="tab3" class="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-left transition-all hover:bg-slate-100/50">
+                            <div class="flex items-center justify-between text-xs font-semibold text-slate-600 mb-1">
+                                <span>3. Make &amp; Trello</span>
+                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+                            </div>
+                            <div class="text-xs text-slate-500 font-mono">ElevenLabs + Trello Card</div>
+                        </button>
                     </div>
-                </div>
 
-                <div class="contact-map">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=K%C4%B1z%C4%B1l%C4%B1rmak%2C%20Ufuk%20%C3%9Cnv.%20Cd%20No%3A10%2C%2006510%20%C3%87ankaya%2FAnkara&t=&z=16&ie=UTF8&iwloc=&output=embed" 
-                        width="100%" 
-                        height="400" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq" id="faqs">
-        <div class="container">
-            <h2 class="reveal" data-en="Wisdom Shared" data-tr="Paylaşılan Bilgelik">Wisdom Shared</h2>
-            <div class="faq-list">
-                <div class="faq-item reveal active">
-                    <div class="faq-question">
-                        <span data-en="Why should I work with you?" data-tr="Neden sizinle çalışmalıyım?">Why should I work with you?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer" data-en="We combine artistic vision with strategic growth to create brands that aren't just seen, but remembered." data-tr="Sanatsal vizyonu stratejik büyüme ile birleştirerek sadece görülen değil, hatırlanan markalar yaratıyoruz.">We combine artistic vision with strategic growth to create brands that aren't just seen, but remembered.</div>
-                </div>
-                <div class="faq-item reveal">
-                    <div class="faq-question">
-                        <span data-en="How does your process function?" data-tr="Süreciniz nasıl işliyor?">How does your process function?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer" data-en="We begin with deep brand DNA analysis, followed by strategic content creation and daily optimization." data-tr="Derin bir marka DNA analizi ile başlıyoruz, ardından stratejik içerik üretimi ve günlük optimizasyon ile devam ediyoruz.">We begin with deep brand DNA analysis, followed by strategic content creation and daily optimization.</div>
-                </div>
-                <div class="faq-item reveal">
-                    <div class="faq-question">
-                        <span data-en="Do you offer package services?" data-tr="Paket hizmetler sunuyor musunuz?">Do you offer package services?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer" data-en="Yes, we provide flexible monthly retainers tailored to your brand's specific stage and goals." data-tr="Evet, markanızın belirli aşamasına ve hedeflerine göre uyarlanmış esnek aylık hizmetler sunuyoruz.">Yes, we provide flexible monthly retainers tailored to your brand's specific stage and goals.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid reveal">
-                <!-- Column 1: Brand -->
-                <div class="footer-col">
-                    <a href="#hero" class="footer-logo">TB <span>TOGETHER</span> SOCIAL</a>
-                    <p class="footer-desc" data-en="Crafting digital legends through artistic strategy and divine design." data-tr="Artistik strateji ve ilahi tasarım yoluyla dijital efsaneler inşa ediyoruz.">Crafting digital legends through artistic strategy and divine design.</p>
-                </div>
-                
-                <!-- Column 2: Navigation -->
-                <div class="footer-col">
-                    <h4 data-en="Company" data-tr="Şirket">Company</h4>
-                    <div class="footer-links">
-                        <a href="#hero" data-en="Home" data-tr="Ana Sayfa">Home</a>
-                        <a href="#process" data-en="Creation Journey" data-tr="Yaratım Yolculuğu">Creation Journey</a>
-                        <a href="#about" data-en="The Architects" data-tr="Mimarlar">The Architects</a>
-                    </div>
-                </div>
-
-                <!-- Column 3: Services -->
-                <div class="footer-col">
-                    <h4 data-en="Services" data-tr="Hizmetler">Services</h4>
-                    <div class="footer-links">
-                        <a href="#process" data-en="Social Media" data-tr="Sosyal Medya">Social Media</a>
-                        <a href="#process" data-en="Graphic Design" data-tr="Grafik Tasarım">Graphic Design</a>
-                        <a href="#process" data-en="Logo Identity" data-tr="Logo Kimliği">Logo Kimliği</a>
-                    </div>
-                </div>
-
-                <!-- Column 4: Social & Contact -->
-                <div class="footer-col">
-                    <h4 data-en="Connect" data-tr="İletişim">Connect</h4>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/social.tbt/" class="social-icon" target="_blank">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        </a>
-                        <a href="mailto:contact@socialtbt.com.tr" class="social-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        </a>
+                    <!-- Output Console (Clean Deep Navy Slate) -->
+                    <div id="tabContent" class="rounded-xl bg-[#0F172A] p-4 font-mono text-xs text-slate-200 shadow-inner">
+                        <span class="text-blue-400">&gt; GET /api/v2/trends</span>
+                        <p class="mt-1 text-slate-300">Modash &amp; Social Firehose scanned: Surge in #FinTechAI (+340% velocity).</p>
+                        <div class="mt-2 text-emerald-400">[SUCCESS] Data normalized &amp; dispatched to Claude prompt engine.</div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 TB TOGETHER SOCIAL. All Rights Reserved.</p>
-            <p data-en="Built for the Bold" data-tr="Cesurlar İçin İnşa Edildi">Built for the Bold</p>
-        </div>
-    </footer>
+        </section>
 
-    <script src="script.js"></script>
+        <!-- 4. Progressive Blur Logo Cloud (Light Mode Blur Masks) -->
+        <section id="integrations" class="relative w-full overflow-hidden py-14 border-y border-slate-200 bg-white">
+            <div class="mx-auto max-w-6xl px-4 text-center mb-8">
+                <p class="text-xs uppercase tracking-[0.25em] text-slate-500 font-bold">
+                    Native Architecture &middot; Powered by the Best in Tech
+                </p>
+            </div>
+
+            <div class="relative flex w-full items-center overflow-hidden">
+                <!-- Left Progressive Blur Gradient -->
+                <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-20 w-28 md:w-48 bg-gradient-to-r from-white via-white/80 to-transparent backdrop-blur-[2px]"></div>
+                <!-- Right Progressive Blur Gradient -->
+                <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-20 w-28 md:w-48 bg-gradient-to-l from-white via-white/80 to-transparent backdrop-blur-[2px]"></div>
+
+                <!-- Marquee Track -->
+                <div class="flex animate-marquee gap-8 whitespace-nowrap will-change-transform py-3">
+                    <!-- Partner 1: Claude -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#D4A574]">CL</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Claude API</span><span class="text-[11px] text-slate-500">Anthropic LLM</span></div>
+                    </div>
+                    <!-- Partner 2: Make.com -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#8B5CF6]">MK</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Make.com</span><span class="text-[11px] text-slate-500">Visual Automation</span></div>
+                    </div>
+                    <!-- Partner 3: ElevenLabs -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0F172A]">XI</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">ElevenLabs</span><span class="text-[11px] text-slate-500">Voice Synthesis</span></div>
+                    </div>
+                    <!-- Partner 4: Modash -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0284C7]">MO</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Modash</span><span class="text-[11px] text-slate-500">Creator Analytics</span></div>
+                    </div>
+                    <!-- Partner 5: Trello -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0079BF]">TR</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Trello</span><span class="text-[11px] text-slate-500">Human-in-the-Loop</span></div>
+                    </div>
+
+                    <!-- Duplicate for seamless loop -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#D4A574]">CL</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Claude API</span><span class="text-[11px] text-slate-500">Anthropic LLM</span></div>
+                    </div>
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#8B5CF6]">MK</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Make.com</span><span class="text-[11px] text-slate-500">Visual Automation</span></div>
+                    </div>
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0F172A]">XI</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">ElevenLabs</span><span class="text-[11px] text-slate-500">Voice Synthesis</span></div>
+                    </div>
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0284C7]">MO</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Modash</span><span class="text-[11px] text-slate-500">Creator Analytics</span></div>
+                    </div>
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0079BF]">TR</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Trello</span><span class="text-[11px] text-slate-500">Human-in-the-Loop</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Features Section (Crisp White Services Cards) -->
+        <section id="features" class="relative py-28 px-4">
+            <div class="mx-auto max-w-6xl">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="flex flex-wrap items-center justify-center gap-2.5 mb-4">
+                        <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                            <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span> AI-Powered
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                            <span class="h-1.5 w-1.5 rounded-full bg-slate-600"></span> Automated
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span> Enterprise
+                        </span>
+                    </div>
+
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] mb-5">
+                        Core Platform <span class="text-blue-600">Features</span>
+                    </h2>
+                    <p class="text-base sm:text-lg text-slate-600">
+                        Four modular engines engineered to replace manual content bottlenecks with 24/7 autonomous software pipelines.
+                    </p>
+                </div>
+
+                <!-- 4 Services Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                    <!-- Card 1 -->
+                    <div class="card-spotlight group rounded-2xl border border-slate-200/80 p-8">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
+                            </div>
+                            <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold tracking-wider text-blue-700 uppercase">Autonomous Ops</span>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
+                            1. Trendden Senaryoya Otomasyon
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            TikTok ve Instagram'da yükselen konuları anlık tarar. Trend soğumadan önce markanızın tonuna uygun 3 farklı video senaryosu hazırlar.
+                        </p>
+                        <ul class="space-y-2 mb-6 border-t border-slate-100 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Günlük niş trend ve format takibi</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Trend başına 3 alternatif video kancası</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Ekibinize hazır metin olarak anında bildirim</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                            <span>Powered by <strong class="text-slate-800">Claude API + Make.com</strong></span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="card-spotlight group rounded-2xl border border-slate-200/80 p-8">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+                            </div>
+                            <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold tracking-wider text-blue-700 uppercase">Dönüşüm Odaklı</span>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
+                            2. Performans Odaklı Reklam Metinleri
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            Reklam kampanyalarında boş Google Docs dosyasıyla boğuşmaya son. Kitle segmentinize uygun, test edilmiş açılar ve dikkat çeken reklam kancaları üretir.
+                        </p>
+                        <ul class="space-y-2 mb-6 border-t border-slate-100 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Problem-Çözüm ve UGC açıları</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Kitle personasına göre otomatik tonlama</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Hızlı A/B test varyasyon çıktısı</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                            <span>Powered by <strong class="text-slate-800">Claude AI + Reklam Analitiği</strong></span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="card-spotlight group rounded-2xl border border-slate-200/80 p-8">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2Z"/></svg>
+                            </div>
+                            <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold tracking-wider text-blue-700 uppercase">Ses &amp; Medya</span>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
+                            3. Senaryodan Seslendirmeye Üretim Hattı
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            Yazılan senaryolar saniyeler içinde stüdyo kalitesinde seslendirmeye dönüşür. Kurgucunuzun Premiere veya CapCut içine doğrudan atabileceği temiz ses dosyaları sunar.
+                        </p>
+                        <ul class="space-y-2 mb-6 border-t border-slate-100 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Stüdyo kalitesinde Türkçe &amp; İngilizce sesler</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Kurguya hazır altyazı zaman işaretleri</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Doğrudan bulut depolama teslimi</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                            <span>Powered by <strong class="text-slate-800">ElevenLabs &middot; Ses Altyapısı</strong></span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="card-spotlight group rounded-2xl border border-slate-200/80 p-8">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
+                                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c5-5 5 5 10 0s5 5 10 0"/><path d="M2 18c5-5 5 5 10 0s5 5 10 0"/></svg>
+                            </div>
+                            <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold tracking-wider text-blue-700 uppercase">Marka Koruma</span>
+                        </div>
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
+                            4. Marka Dili ve Koruma Kalkanı
+                        </h3>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
+                            Müşterinizin önceki en iyi paylaşımlarını ve yasaklı kelimelerini öğrenir. Asla markanın karakteri dışına çıkmayan, tutarlı ve güvenli paylaşımlar garanti eder.
+                        </p>
+                        <ul class="space-y-2 mb-6 border-t border-slate-100 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Sıkı ton ve kurumsal kimlik kontrolü</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Yasaklı kelime ve iddia filtreleri</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Halüsinasyonsuz, doğrulanmış metinler</li>
+                        </ul>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                            <span>Powered by <strong class="text-slate-800">Prompt Guardrails</strong></span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. The Automation Pipeline & Stats -->
+        <section id="pipeline" class="relative py-28 px-4 border-t border-slate-200 bg-white">
+            <div class="mx-auto max-w-6xl">
+                <div class="text-center max-w-3xl mx-auto mb-20">
+                    <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 mb-4">
+                        Software Workflow
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] mb-5">
+                        The Automation <span class="text-blue-600">Pipeline</span>
+                    </h2>
+                    <p class="text-base sm:text-lg text-slate-600">
+                        Four synchronized execution layers orchestrating content from raw market data to live published posts.
+                    </p>
+                </div>
+
+                <!-- 4 Steps -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50/50 p-8">
+                        <span class="text-xs font-mono font-bold text-blue-600">PHASE 01</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-3">Data Discovery</h3>
+                        <p class="text-sm text-slate-600 mb-5 leading-relaxed">Automated pipelines continuously ingest trend signals, keyword volume surges, and competitor actions to extract high-leverage content opportunities.</p>
+                        <div class="text-xs text-slate-700 font-mono bg-white p-3 rounded-xl border border-slate-200">
+                            &gt; Ingesting trends across 12 social endpoints via Modash API
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50/50 p-8">
+                        <span class="text-xs font-mono font-bold text-blue-600">PHASE 02</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-3">Content Generation</h3>
+                        <p class="text-sm text-slate-600 mb-5 leading-relaxed">Claude API crafts audience-tailored video scripts, hooks, and captions. ElevenLabs generates human-quality voiceovers in parallel.</p>
+                        <div class="text-xs text-slate-700 font-mono bg-white p-3 rounded-xl border border-slate-200">
+                            &gt; Claude 3.5 synthesis + ElevenLabs voice cloning triggered
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50/50 p-8">
+                        <span class="text-xs font-mono font-bold text-blue-600">PHASE 03</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-3">Automated Launch</h3>
+                        <p class="text-sm text-slate-600 mb-5 leading-relaxed">Everything syncs to your team&apos;s Trello boards for quick review. Once approved, Make.com schedules and publishes to TikTok, Instagram, and LinkedIn.</p>
+                        <div class="text-xs text-slate-700 font-mono bg-white p-3 rounded-xl border border-slate-200">
+                            &gt; Card queued in Trello &middot; Make.com multi-publish scenario ready
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50/50 p-8">
+                        <span class="text-xs font-mono font-bold text-blue-600">PHASE 04</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-3">Performance Analytics &amp; ML</h3>
+                        <p class="text-sm text-slate-600 mb-5 leading-relaxed">Real-time performance feedback updates neural weights to optimize future content generation and maximize viral reach.</p>
+                        <div class="text-xs text-slate-700 font-mono bg-white p-3 rounded-xl border border-slate-200">
+                            &gt; Continuous feedback loop retraining prompt models
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats by the Numbers (Humanized & Grounded) -->
+                <div class="rounded-2xl border border-slate-200 bg-slate-50 p-8 sm:p-12 shadow-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                        <div class="pt-4 md:pt-0">
+                            <div class="text-5xl font-black text-slate-900">3.8<span class="text-blue-600">x</span></div>
+                            <div class="text-sm font-semibold uppercase tracking-wider text-slate-700 mt-2">Daha Hızlı Üretim</div>
+                            <p class="text-xs text-slate-500 mt-1">4 günlük video hazırlık sürecini 4 saate düşürür</p>
+                        </div>
+                        <div class="pt-6 md:pt-0">
+                            <div class="text-5xl font-black text-slate-900">%92</div>
+                            <div class="text-sm font-semibold uppercase tracking-wider text-slate-700 mt-2">İlk Taslak Onayı</div>
+                            <p class="text-xs text-slate-500 mt-1">Müşteri revizyonlarında ölçülen ortalama azalma</p>
+                        </div>
+                        <div class="pt-6 md:pt-0">
+                            <div class="text-5xl font-black text-slate-900">18.5<span class="text-blue-600">s</span></div>
+                            <div class="text-sm font-semibold uppercase tracking-wider text-slate-700 mt-2">Haftalık Kazanım</div>
+                            <p class="text-xs text-slate-500 mt-1">İçerik yöneticisi başına geri kazanılan operasyonel süre</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. About Section & Founders -->
+        <section id="about" class="relative py-28 px-4 bg-[#F8FAFC]">
+            <div class="mx-auto max-w-6xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                            Platform Vision
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] leading-tight">
+                            Blending Marketing Strategy with <span class="text-blue-600">Advanced Artificial Intelligence</span>
+                        </h2>
+                        <p class="text-base text-slate-600 leading-relaxed">
+                            tbtsocial was built to bridge the gap between creative storytelling and algorithmic efficiency. Instead of running disjointed agency services, we engineer software platforms that automate the entire content lifecycle.
+                        </p>
+                    </div>
+
+                    <!-- Founders Box -->
+                    <div class="lg:col-span-5">
+                        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                                <span class="text-xs uppercase tracking-widest text-blue-700 font-bold">Leadership &amp; Architecture</span>
+                                <span class="text-xs font-mono text-slate-400">tbtsocial</span>
+                            </div>
+                            <!-- Burak Fidan -->
+                            <div class="flex items-center gap-4 rounded-xl border border-slate-100 bg-slate-50/70 p-4">
+                                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0F172A] text-base font-bold text-white shadow-sm">
+                                    BF
+                                </div>
+                                <div>
+                                    <div class="text-base font-bold text-slate-900">Burak Fidan</div>
+                                    <div class="text-xs text-blue-600 font-medium">Founder &amp; Platform Architect</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="max-w-3xl mx-auto">
+                    <h3 class="text-3xl font-black text-slate-900 text-center mb-8">Frequently Asked Questions</h3>
+                    <div class="space-y-4">
+                        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                            <h4 class="font-bold text-slate-900 mb-2">How does the AI platform work?</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">Our engine connects real-time trend feeds to the Claude API. It drafts brand-aligned scripts, triggers ElevenLabs for AI voiceovers, and syncs approval cards to Trello before publishing via Make.com.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                            <h4 class="font-bold text-slate-900 mb-2">Can I connect our custom agency tech stack via API?</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">Yes. tbtsocial provides full REST endpoints, webhook triggers, and 1,500+ pre-built Make.com integrations so you can seamlessly link your CRM, Slack, and publishing channels.</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                            <h4 class="font-bold text-slate-900 mb-2">What are the SaaS retainer and subscription models?</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">We provide flexible monthly SaaS retainers scaled to your monthly pipeline volume. From boutique agencies managing 5 pipelines to enterprise teams running autonomous multi-brand operations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Hover Footer (Crisp Light Mode Style) -->
+        <footer id="contact" class="relative overflow-hidden border-t border-slate-200 bg-white pt-24 pb-36 text-slate-900">
+            <div id="footerSpotlight" class="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-300"></div>
+
+            <!-- Massive Background Backdrop -->
+            <div class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 select-none z-0">
+                <span class="text-[14vw] font-black tracking-tighter text-slate-100">TBTSOCIAL</span>
+            </div>
+
+            <div class="relative z-10 mx-auto max-w-6xl px-6">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                    <div class="md:col-span-5 space-y-4">
+                        <div class="flex items-center gap-2">
+                            <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0F172A] text-white">
+                                <svg class="h-5 w-5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                            </div>
+                            <span class="text-xl font-bold tracking-tight text-slate-900">tbtsocial<span class="text-blue-600">.</span></span>
+                        </div>
+                        <p class="text-sm text-slate-600 max-w-sm leading-relaxed">
+                            The AI-Native Content Operations and Automation Platform for high-growth digital agencies and modern marketing teams.
+                        </p>
+                    </div>
+
+                    <div class="md:col-span-2 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Navigation</h4>
+                        <ul class="space-y-2.5 text-sm">
+                            <li><a href="#features" class="css-link-hover text-slate-700 font-medium">Features</a></li>
+                            <li><a href="#pipeline" class="css-link-hover text-slate-700 font-medium">The Pipeline</a></li>
+                            <li><a href="#integrations" class="css-link-hover text-slate-700 font-medium">Integrations</a></li>
+                            <li><a href="https://cal.com/tbtsocial/30min" target="_blank" class="css-link-hover text-slate-700 font-medium">Request API</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="md:col-span-2 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Direct Contact</h4>
+                        <ul class="space-y-2.5 text-sm text-slate-700">
+                            <li><a href="tel:05340637353" class="hover:text-blue-600 transition-colors">0534 063 73 53</a></li>
+                            <li><a href="mailto:contact@socialtbt.com.tr" class="hover:text-blue-600 transition-colors">contact@socialtbt.com.tr</a></li>
+                            <li><a href="https://wa.me/905340637353" target="_blank" class="css-link-hover text-blue-600 font-semibold">WhatsApp Direct</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="md:col-span-3 space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Founder</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                                <div class="font-semibold text-slate-900">Burak Fidan</div>
+                                <div class="text-xs text-slate-500">Founder &amp; Growth Architect</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-8 text-xs text-slate-500">
+                    <div>&copy; 2026 tbtsocial. All Rights Reserved.</div>
+                    <div class="flex items-center gap-6">
+                        <a href="#" class="hover:text-slate-900 transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-slate-900 transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- 9. Floating Dock (Apple / Framer Crisp Light Mode Pill) -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <nav id="floatingDock" class="flex items-end gap-3 rounded-3xl border border-slate-200/90 bg-white/90 px-4 py-3 backdrop-blur-2xl shadow-[0_12px_40px_rgba(15,23,42,0.12)]">
+            <a href="#hero" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            </a>
+            <a href="#features" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </a>
+            <a href="#hero" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-blue-600 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg>
+            </a>
+            <a href="#pipeline" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>
+            </a>
+            <a href="#contact" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Scripts for Canvas Wave, Limelight Nav, Spotlight Card, and Download Button -->
+    <script>
+        // 1. Wave Background (Light Mode Porcelain & Subtle Blue Flow)
+        (function() {
+            const canvas = document.getElementById('waveCanvas');
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+            let step = 0;
+            let mouse = { x: width/2, y: height/2 };
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            function render() {
+                step += 0.012;
+                ctx.fillStyle = '#F8FAFC';
+                ctx.fillRect(0, 0, width, height);
+
+                // Subtle Radial Gradient
+                const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, Math.max(width, height)*0.55);
+                grad.addColorStop(0, 'rgba(37, 99, 235, 0.05)');
+                grad.addColorStop(0.5, 'rgba(219, 234, 254, 0.03)');
+                grad.addColorStop(1, 'rgba(248, 250, 252, 0)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, width, height);
+
+                // Wave ribbons
+                for (let i = 0; i < 6; i++) {
+                    ctx.beginPath();
+                    const baseHeight = height * 0.58 + i * 26;
+                    const amp = 30 + i * 10;
+                    const freq = 0.0018 + i * 0.0003;
+                    const phase = step * (0.8 + i * 0.2);
+
+                    for (let x = 0; x <= width; x += 6) {
+                        const dist = Math.abs(x - mouse.x);
+                        const lift = Math.max(0, 1 - dist/500) * 16;
+                        const y = baseHeight + Math.sin(x * freq + phase) * amp + Math.cos(x * 0.001 - phase * 0.5) * (amp * 0.6) - lift;
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.strokeStyle = i % 2 === 0 ? 'rgba(37, 99, 235, 0.12)' : 'rgba(148, 163, 184, 0.15)';
+                    ctx.lineWidth = i === 2 ? 1.5 : 1;
+                    ctx.stroke();
+                }
+                requestAnimationFrame(render);
+            }
+            render();
+        })();
+
+        // 2. Limelight Nav tracker
+        (function() {
+            const container = document.getElementById('navLinksContainer');
+            const spotlight = document.getElementById('limelightSpotlight');
+            const links = container.querySelectorAll('.nav-btn');
+
+            links.forEach(link => {
+                link.addEventListener('mouseenter', (e) => {
+                    const rect = e.target.getBoundingClientRect();
+                    const cRect = container.getBoundingClientRect();
+                    spotlight.style.width = rect.width + 'px';
+                    spotlight.style.left = (rect.left - cRect.left) + 'px';
+                    spotlight.style.opacity = '1';
+                });
+            });
+
+            container.addEventListener('mouseleave', () => {
+                spotlight.style.opacity = '0';
+            });
+        })();
+
+        // 3. Download Button Animation state machine
+        (function() {
+            const btn = document.getElementById('ctaDownloadBtn');
+            const progress = document.getElementById('ctaProgressFill');
+            const content = document.getElementById('ctaBtnContent');
+            let running = false;
+
+            btn.addEventListener('click', () => {
+                if (running) return;
+                running = true;
+                let pct = 0;
+                content.innerHTML = `<svg class="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg><span>Connecting Pipelines...</span>`;
+
+                const iv = setInterval(() => {
+                    pct += 15;
+                    progress.style.width = pct + '%';
+                    if (pct >= 100) {
+                        clearInterval(iv);
+                        content.innerHTML = `<span class="flex items-center gap-2 text-white font-semibold"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Pipeline Connected!</span>`;
+                        setTimeout(() => {
+                            window.open('https://cal.com/tbtsocial/30min', '_blank');
+                            running = false;
+                            progress.style.width = '0%';
+                            content.innerHTML = `<svg class="h-4 w-4 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg><span>Request API Access</span><svg class="h-4 w-4 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg>`;
+                        }, 1600);
+                    }
+                }, 120);
+            });
+        })();
+
+        // 4. Card Spotlight Coordinates
+        document.querySelectorAll('.card-spotlight').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+                card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+            });
+        });
+
+        // 5. Footer Spotlight
+        const footer = document.getElementById('contact');
+        const footerSpot = document.getElementById('footerSpotlight');
+        if (footer && footerSpot) {
+            footer.addEventListener('mousemove', (e) => {
+                const rect = footer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                footerSpot.style.opacity = '1';
+                footerSpot.style.background = `radial-gradient(500px circle at ${x}px ${y}px, rgba(37, 99, 235, 0.08), transparent 70%)`;
+            });
+            footer.addEventListener('mouseleave', () => {
+                footerSpot.style.opacity = '0';
+            });
+        }
+
+        // 6. Dock Magnification physics simulation
+        const dock = document.getElementById('floatingDock');
+        const dockItems = dock.querySelectorAll('.dock-item');
+        dock.addEventListener('mousemove', (e) => {
+            dockItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                const itemCenter = rect.left + rect.width / 2;
+                const dist = Math.abs(e.clientX - itemCenter);
+                if (dist < 120) {
+                    const scale = 1 + (1 - dist / 120) * 0.35;
+                    item.style.transform = `scale(${scale}) translateY(-${(scale - 1) * 10}px)`;
+                } else {
+                    item.style.transform = 'scale(1) translateY(0)';
+                }
+            });
+        });
+        dock.addEventListener('mouseleave', () => {
+            dockItems.forEach(item => {
+                item.style.transform = 'scale(1) translateY(0)';
+            });
+        });
+
+        // 7. Tab Switcher
+        function setTab(num) {
+            const tabs = [document.getElementById('tab1'), document.getElementById('tab2'), document.getElementById('tab3')];
+            const content = document.getElementById('tabContent');
+            tabs.forEach((t, i) => {
+                if (i === num - 1) {
+                    t.className = "rounded-xl border border-blue-600/30 bg-blue-50/60 p-3.5 text-left transition-all";
+                } else {
+                    t.className = "rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-left transition-all hover:bg-slate-100/50";
+                }
+            });
+
+            if (num === 1) {
+                content.innerHTML = `<span class="text-blue-400">&gt; GET /api/v2/trends</span><p class="mt-1 text-slate-300">Modash &amp; Social Firehose scanned: Surge in #FinTechAI (+340% velocity).</p><div class="mt-2 text-emerald-400">[SUCCESS] Data normalized &amp; dispatched to Claude prompt engine.</div>`;
+            } else if (num === 2) {
+                content.innerHTML = `<span class="text-blue-400">&gt; POST /anthropic/claude-3-5/generate</span><p class="mt-1 text-slate-300">"Why 90% of SaaS founders are switching to autonomous content queues in 2026..."</p><div class="mt-2 text-emerald-400">[SUCCESS] 3 localized hook variants generated (TikTok, Reels, LinkedIn).</div>`;
+            } else if (num === 3) {
+                content.innerHTML = `<span class="text-blue-400">&gt; RUN make.com/scenario/publish-hook</span><p class="mt-1 text-slate-300">ElevenLabs cloned voice rendering completed (0.84s). Card created on Trello: "Weekly Review &mdash; High Priority".</p><div class="mt-2 text-emerald-400">[SUCCESS] Ready for 1-click human approval or autonomous scheduled dispatch.</div>`;
+            }
+        }
+    </script>
 </body>
 </html>
