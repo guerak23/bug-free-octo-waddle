@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tbtsocial. — AI-Native Content Operations & Automation Platform (2026)</title>
-    <meta name="description" content="tbtsocial — AI-Native Content Operations Platform. Replicating 21st.dev / Magic UI / Aceternity components: wave background, limelight nav, floating dock, progressive blur logos, services cards, and hover footer.">
+    <title>tbtsocial. — AI-Native Content Operations Platform</title>
+    <meta name="description" content="tbtsocial — AI-Native Content Operations Platform. Crisp Minimal Light Mode inspired by Apple & Framer with precision Cobalt Blue accents.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,14 +18,21 @@
             theme: {
                 extend: {
                     colors: {
-                        navy: {
-                            950: '#040c17',
-                            900: '#061325',
-                            800: '#0A2342', // Primary
-                            700: '#0f315a',
-                            600: '#174276', // Accent
-                            500: '#1f569b',
-                            400: '#38bdf8',
+                        surface: {
+                            DEFAULT: '#F8FAFC',
+                            subtle: '#F1F5F9',
+                            card: '#FFFFFF',
+                            border: '#E2E8F0',
+                            ink: '#0F172A',
+                            muted: '#64748B',
+                        },
+                        cobalt: {
+                            50: '#EFF6FF',
+                            100: '#DBEAFE',
+                            500: '#3B82F6',
+                            600: '#2563EB', // Primary Accent
+                            700: '#1D4ED8',
+                            800: '#1E40AF',
                         }
                     },
                     fontFamily: {
@@ -39,7 +46,7 @@
                         }
                     },
                     animation: {
-                        marquee: 'marquee 25s linear infinite',
+                        marquee: 'marquee 28s linear infinite',
                     }
                 }
             }
@@ -48,10 +55,11 @@
 
     <style>
         body {
-            background-color: #061325;
-            color: #ffffff;
+            background-color: #F8FAFC;
+            color: #0F172A;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Limelight Nav Glow */
@@ -62,6 +70,13 @@
         /* 3D Services Card spotlight border effect */
         .card-spotlight {
             position: relative;
+            background: #FFFFFF;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+        }
+        .card-spotlight:hover {
+            box-shadow: 0 25px 45px -10px rgba(37, 99, 235, 0.12), 0 10px 20px -5px rgba(15, 23, 42, 0.04);
+            transform: translateY(-4px);
         }
         .card-spotlight::before {
             content: '';
@@ -69,7 +84,7 @@
             inset: -1px;
             border-radius: 1rem;
             padding: 1px;
-            background: radial-gradient(400px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(56, 189, 248, 0.4), transparent 60%);
+            background: radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(37, 99, 235, 0.5), transparent 60%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -92,7 +107,7 @@
             left: 0;
             width: 0;
             height: 1.5px;
-            background: linear-gradient(90deg, #38bdf8, #174276);
+            background: #2563EB;
             transition: width 0.3s ease;
         }
         .css-link-hover:hover::after {
@@ -101,51 +116,51 @@
 
         /* Floating Dock Magnification physics */
         .dock-item {
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), width 0.2s cubic-bezier(0.16, 1, 0.3, 1), height 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
         }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 7px; }
-        ::-webkit-scrollbar-track { background: #061325; }
-        ::-webkit-scrollbar-thumb { background: #174276; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+        ::-webkit-scrollbar-track { background: #F8FAFC; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563EB; }
     </style>
 </head>
 <body class="relative">
 
-    <!-- 1. Wave Background Canvas (replicates xubohuah/wave-background & celestial bloom) -->
+    <!-- 1. Wave Background Canvas (Crisp Porcelain & Soft Light Gray/Cobalt Ribbons) -->
     <canvas id="waveCanvas" class="fixed inset-0 pointer-events-none z-0 w-full h-full"></canvas>
     
-    <!-- Subtle Grid Overlay -->
-    <div class="fixed inset-0 pointer-events-none z-0 opacity-15"
-         style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px); background-size: 50px 50px;">
+    <!-- Clean Dot Grid Texture -->
+    <div class="fixed inset-0 pointer-events-none z-0 opacity-40"
+         style="background-image: radial-gradient(#CBD5E1 1px, transparent 1px); background-size: 28px 28px;">
     </div>
 
-    <!-- 2. Limelight Top Navigation (replicates easemize/limelight-nav) -->
+    <!-- 2. Limelight Top Navigation (Apple/Framer Frosted Glass Style) -->
     <header class="fixed top-5 left-0 right-0 z-50 flex justify-center px-4">
-        <nav id="limelightNav" class="relative flex items-center justify-between gap-6 rounded-full border border-white/10 bg-[#0A2342]/75 px-5 py-2.5 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] max-w-4xl w-full">
+        <nav id="limelightNav" class="relative flex items-center justify-between gap-6 rounded-full border border-slate-200/80 bg-white/80 px-5 py-2.5 backdrop-blur-xl shadow-[0_4px_25px_rgba(15,23,42,0.06)] max-w-4xl w-full">
             <!-- Brand Logo -->
             <a href="#hero" class="flex items-center gap-2 group">
-                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#174276] text-white shadow-[0_0_15px_rgba(56,189,248,0.35)] transition-transform group-hover:scale-105">
-                    <svg class="h-4 w-4 text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0F172A] text-white shadow-sm transition-transform group-hover:scale-105">
+                    <svg class="h-4 w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                 </div>
-                <span class="text-base font-bold tracking-tight text-white">
-                    tbtsocial<span class="text-sky-400">.</span>
+                <span class="text-base font-bold tracking-tight text-[#0F172A]">
+                    tbtsocial<span class="text-blue-600">.</span>
                 </span>
             </a>
 
             <!-- Links with Limelight Glow Slider -->
             <div class="hidden md:flex items-center gap-1 relative" id="navLinksContainer">
-                <div id="limelightSpotlight" class="absolute h-8 rounded-full bg-gradient-to-r from-[#174276] to-[#0f315a] border border-sky-400/30 shadow-[0_0_20px_rgba(56,189,248,0.25)] -z-10 opacity-0 limelight-pill pointer-events-none"></div>
-                <a href="#features" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-300 hover:text-white transition-colors">Features</a>
-                <a href="#integrations" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-300 hover:text-white transition-colors">Integrations</a>
-                <a href="#pipeline" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-300 hover:text-white transition-colors">Pipeline</a>
-                <a href="#about" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-300 hover:text-white transition-colors">About</a>
+                <div id="limelightSpotlight" class="absolute h-8 rounded-full bg-slate-100 border border-slate-200 -z-10 opacity-0 limelight-pill pointer-events-none"></div>
+                <a href="#features" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-600 hover:text-slate-900 transition-colors">Features</a>
+                <a href="#integrations" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-600 hover:text-slate-900 transition-colors">Integrations</a>
+                <a href="#pipeline" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-600 hover:text-slate-900 transition-colors">Pipeline</a>
+                <a href="#about" class="nav-btn px-4 py-1.5 text-xs uppercase tracking-wider font-semibold text-slate-600 hover:text-slate-900 transition-colors">About</a>
             </div>
 
             <!-- CTA Button -->
             <div class="flex items-center gap-3">
-                <a href="https://cal.com/tbtsocial/30min" target="_blank" class="relative group inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-sky-400/40 bg-gradient-to-r from-[#174276] to-[#0A2342] px-4 py-1.5 text-xs font-semibold text-white shadow-[0_0_20px_rgba(23,66,118,0.5)] transition-all hover:scale-105 hover:border-sky-300">
+                <a href="https://cal.com/tbtsocial/30min" target="_blank" class="relative group inline-flex items-center gap-1.5 overflow-hidden rounded-full bg-[#0F172A] px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-blue-600 hover:shadow-md">
                     <span>Request Demo</span>
                     <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
@@ -156,186 +171,190 @@
     <!-- Main Content Area -->
     <main class="relative z-10 w-full">
 
-        <!-- 3. Hero Section (replicates prebuiltui & wisedev/portfolio-hero) -->
-        <section id="hero" class="relative min-h-[92vh] flex flex-col items-center justify-center pt-32 pb-20 px-4 text-center">
+        <!-- 3. Hero Section (Crisp Minimal Light Mode) -->
+        <section id="hero" class="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-20 px-4 text-center">
             <div class="max-w-5xl mx-auto">
-                <!-- Marketing Badge (replicates jatin-yadav05/marketing-badges) -->
-                <div class="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-[#174276]/30 px-3.5 py-1 text-xs font-semibold text-sky-200 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(56,189,248,0.15)]">
+                <!-- Marketing Badge -->
+                <div class="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50/80 px-3.5 py-1 text-xs font-semibold text-blue-700 backdrop-blur-md mb-6 shadow-sm">
                     <span class="relative flex h-2 w-2">
-                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
-                        <span class="relative inline-flex h-2 w-2 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]"></span>
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-blue-600"></span>
                     </span>
-                    <span>AI-Native Platform &middot; Claude 3.5 Engine</span>
+                    <span>Autonomous Content Engine &middot; Claude 3.5 Native</span>
                 </div>
 
                 <!-- Headline -->
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#0F172A] leading-[1.1] mb-6">
                     Content Operations on <br>
-                    <span class="bg-gradient-to-r from-sky-300 via-sky-400 to-[#60a5fa] bg-clip-text text-transparent">
+                    <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
                         Autopilot with AI.
                     </span>
                 </h1>
 
                 <!-- Subheadline -->
-                <p class="mx-auto max-w-2xl text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed mb-10">
+                <p class="mx-auto max-w-2xl text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed mb-10 font-normal">
                     Streamline your digital agency workflows. Connect real-time trend data, automate script generation, and manage campaigns in one unified platform.
                 </p>
 
-                <!-- Glowing Download CTA (replicates n38693842/download-animation) -->
+                <!-- Glowing Download CTA -->
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
                     <div class="relative group">
-                        <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-sky-400/30 via-[#174276] to-sky-500/30 opacity-70 blur-lg transition duration-500 group-hover:opacity-100"></div>
-                        <button id="ctaDownloadBtn" class="relative flex items-center justify-center gap-3 overflow-hidden rounded-xl border border-white/20 bg-gradient-to-b from-[#174276] to-[#0A2342] px-7 py-4 font-semibold text-white shadow-2xl transition-all duration-300 min-w-[250px] hover:scale-[1.02]">
-                            <div id="ctaProgressFill" class="absolute left-0 top-0 bottom-0 bg-sky-500/20 w-0 transition-all duration-100"></div>
+                        <div class="absolute -inset-1 rounded-2xl bg-blue-600/20 opacity-0 blur-lg transition duration-300 group-hover:opacity-100"></div>
+                        <button id="ctaDownloadBtn" class="relative flex items-center justify-center gap-3 overflow-hidden rounded-xl bg-blue-600 px-7 py-4 font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 min-w-[250px] hover:bg-blue-700 hover:scale-[1.01]">
+                            <div id="ctaProgressFill" class="absolute left-0 top-0 bottom-0 bg-white/20 w-0 transition-all duration-100"></div>
                             <span id="ctaBtnContent" class="relative z-10 flex items-center gap-2.5 text-sm md:text-base font-semibold">
-                                <svg class="h-4 w-4 text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                                <svg class="h-4 w-4 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                                 <span>Request API Access</span>
-                                <svg class="h-4 w-4 text-sky-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg>
+                                <svg class="h-4 w-4 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg>
                             </span>
                         </button>
                     </div>
 
-                    <a href="#pipeline" class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.05] px-6 py-4 text-sm font-semibold text-white backdrop-blur-md transition-all hover:bg-white/10 hover:border-sky-400/40">
-                        <svg class="h-4 w-4 text-sky-400 fill-sky-400" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    <a href="#pipeline" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-4 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:bg-slate-50 hover:border-slate-400">
+                        <svg class="h-4 w-4 text-blue-600 fill-blue-600" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                         <span>Explore Automations</span>
                     </a>
                 </div>
 
-                <!-- Interactive Dashboard Preview Card -->
-                <div class="relative mx-auto max-w-4xl rounded-2xl border border-white/15 bg-[#0A2342]/60 p-5 sm:p-6 backdrop-blur-2xl shadow-[0_25px_80px_rgba(0,0,0,0.55)] text-left">
-                    <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                <!-- Interactive Dashboard Preview Card (Crisp White Card with Soft Shadows) -->
+                <div class="relative mx-auto max-w-4xl rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 shadow-[0_20px_60px_-15px_rgba(15,23,42,0.08)] text-left">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
                         <div class="flex items-center gap-2">
                             <div class="flex gap-1.5">
-                                <div class="h-3 w-3 rounded-full bg-rose-500/80"></div>
-                                <div class="h-3 w-3 rounded-full bg-amber-500/80"></div>
-                                <div class="h-3 w-3 rounded-full bg-emerald-500/80"></div>
+                                <div class="h-3 w-3 rounded-full bg-slate-200"></div>
+                                <div class="h-3 w-3 rounded-full bg-slate-200"></div>
+                                <div class="h-3 w-3 rounded-full bg-slate-200"></div>
                             </div>
                             <span class="text-xs font-mono text-slate-400 ml-2">tbtsocial-engine://pipeline/live</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
-                            <span class="text-xs font-mono text-emerald-300">Claude 3.5 Active</span>
+                            <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
+                            <span class="text-xs font-mono font-medium text-emerald-600">Claude 3.5 Connected</span>
                         </div>
                     </div>
 
                     <!-- Steps Tabs -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-                        <button onclick="setTab(1)" id="tab1" class="rounded-xl border border-sky-400/60 bg-sky-950/40 p-3.5 text-left transition-all">
-                            <div class="flex items-center justify-between text-xs font-semibold text-sky-300 mb-1">
+                        <button onclick="setTab(1)" id="tab1" class="rounded-xl border border-blue-600/30 bg-blue-50/60 p-3.5 text-left transition-all">
+                            <div class="flex items-center justify-between text-xs font-semibold text-blue-700 mb-1">
                                 <span>1. Signal Ingestion</span>
                                 <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
                             </div>
-                            <div class="text-xs text-slate-300 font-mono">+14 viral trends captured</div>
+                            <div class="text-xs text-slate-700 font-mono">+14 viral trends captured</div>
                         </button>
-                        <button onclick="setTab(2)" id="tab2" class="rounded-xl border border-white/5 bg-white/[0.02] p-3.5 text-left transition-all hover:bg-white/[0.05]">
-                            <div class="flex items-center justify-between text-xs font-semibold text-slate-300 mb-1">
+                        <button onclick="setTab(2)" id="tab2" class="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-left transition-all hover:bg-slate-100/50">
+                            <div class="flex items-center justify-between text-xs font-semibold text-slate-600 mb-1">
                                 <span>2. Claude Scripting</span>
                                 <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
                             </div>
-                            <div class="text-xs text-slate-400 font-mono">Script generated &amp; synced</div>
+                            <div class="text-xs text-slate-500 font-mono">Script generated &amp; synced</div>
                         </button>
-                        <button onclick="setTab(3)" id="tab3" class="rounded-xl border border-white/5 bg-white/[0.02] p-3.5 text-left transition-all hover:bg-white/[0.05]">
-                            <div class="flex items-center justify-between text-xs font-semibold text-slate-300 mb-1">
+                        <button onclick="setTab(3)" id="tab3" class="rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-left transition-all hover:bg-slate-100/50">
+                            <div class="flex items-center justify-between text-xs font-semibold text-slate-600 mb-1">
                                 <span>3. Make &amp; Trello</span>
                                 <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
                             </div>
-                            <div class="text-xs text-slate-400 font-mono">ElevenLabs + Trello Card</div>
+                            <div class="text-xs text-slate-500 font-mono">ElevenLabs + Trello Card</div>
                         </button>
                     </div>
 
-                    <!-- Output Console -->
-                    <div id="tabContent" class="rounded-xl border border-white/5 bg-[#061325]/80 p-4 font-mono text-xs text-slate-300">
-                        <span class="text-sky-400">&gt; GET /api/v2/trends</span>
-                        <p class="mt-1 text-slate-400">Modash &amp; Social Firehose scanned: Surge in #FinTechAI (+340% velocity).</p>
+                    <!-- Output Console (Clean Deep Navy Slate) -->
+                    <div id="tabContent" class="rounded-xl bg-[#0F172A] p-4 font-mono text-xs text-slate-200 shadow-inner">
+                        <span class="text-blue-400">&gt; GET /api/v2/trends</span>
+                        <p class="mt-1 text-slate-300">Modash &amp; Social Firehose scanned: Surge in #FinTechAI (+340% velocity).</p>
                         <div class="mt-2 text-emerald-400">[SUCCESS] Data normalized &amp; dispatched to Claude prompt engine.</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. Progressive Blur Logo Cloud (replicates motion-primitives/progressive-blur/with-logos) -->
-        <section id="integrations" class="relative w-full overflow-hidden py-14">
+        <!-- 4. Progressive Blur Logo Cloud (Light Mode Blur Masks) -->
+        <section id="integrations" class="relative w-full overflow-hidden py-14 border-y border-slate-200 bg-white">
             <div class="mx-auto max-w-6xl px-4 text-center mb-8">
-                <p class="text-xs uppercase tracking-[0.25em] text-slate-400 font-semibold">
+                <p class="text-xs uppercase tracking-[0.25em] text-slate-500 font-bold">
                     Native Architecture &middot; Powered by the Best in Tech
                 </p>
             </div>
 
             <div class="relative flex w-full items-center overflow-hidden">
                 <!-- Left Progressive Blur Gradient -->
-                <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-20 w-28 md:w-48 bg-gradient-to-r from-[#061325] via-[#061325]/80 to-transparent backdrop-blur-[2px]"></div>
+                <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-20 w-28 md:w-48 bg-gradient-to-r from-white via-white/80 to-transparent backdrop-blur-[2px]"></div>
                 <!-- Right Progressive Blur Gradient -->
-                <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-20 w-28 md:w-48 bg-gradient-l from-[#061325] via-[#061325]/80 to-transparent backdrop-blur-[2px]"></div>
+                <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-20 w-28 md:w-48 bg-gradient-to-l from-white via-white/80 to-transparent backdrop-blur-[2px]"></div>
 
                 <!-- Marquee Track -->
-                <div class="flex animate-marquee gap-8 whitespace-nowrap will-change-transform py-4">
-                    <!-- Set 1 -->
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
+                <div class="flex animate-marquee gap-8 whitespace-nowrap will-change-transform py-3">
+                    <!-- Partner 1: Claude -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
                         <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#D4A574]">CL</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">Claude API</span><span class="text-[11px] text-slate-400">Anthropic LLM</span></div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Claude API</span><span class="text-[11px] text-slate-500">Anthropic LLM</span></div>
                     </div>
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
+                    <!-- Partner 2: Make.com -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
                         <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#8B5CF6]">MK</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">Make.com</span><span class="text-[11px] text-slate-400">Visual Automation</span></div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Make.com</span><span class="text-[11px] text-slate-500">Visual Automation</span></div>
                     </div>
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
-                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#38BDF8]">XI</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">ElevenLabs</span><span class="text-[11px] text-slate-400">Voice Synthesis</span></div>
+                    <!-- Partner 3: ElevenLabs -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0F172A]">XI</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">ElevenLabs</span><span class="text-[11px] text-slate-500">Voice Synthesis</span></div>
                     </div>
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
-                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0EA5E9]">MO</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">Modash</span><span class="text-[11px] text-slate-400">Creator Analytics</span></div>
+                    <!-- Partner 4: Modash -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0284C7]">MO</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Modash</span><span class="text-[11px] text-slate-500">Creator Analytics</span></div>
                     </div>
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
+                    <!-- Partner 5: Trello -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
                         <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0079BF]">TR</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">Trello</span><span class="text-[11px] text-slate-400">Human-in-the-Loop</span></div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Trello</span><span class="text-[11px] text-slate-500">Human-in-the-Loop</span></div>
                     </div>
 
-                    <!-- Set 2 Duplicate for infinite loop -->
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
+                    <!-- Duplicate for seamless loop -->
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
                         <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#D4A574]">CL</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">Claude API</span><span class="text-[11px] text-slate-400">Anthropic LLM</span></div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Claude API</span><span class="text-[11px] text-slate-500">Anthropic LLM</span></div>
                     </div>
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
                         <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#8B5CF6]">MK</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">Make.com</span><span class="text-[11px] text-slate-400">Visual Automation</span></div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Make.com</span><span class="text-[11px] text-slate-500">Visual Automation</span></div>
                     </div>
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
-                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#38BDF8]">XI</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">ElevenLabs</span><span class="text-[11px] text-slate-400">Voice Synthesis</span></div>
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0F172A]">XI</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">ElevenLabs</span><span class="text-[11px] text-slate-500">Voice Synthesis</span></div>
                     </div>
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
-                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0EA5E9]">MO</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">Modash</span><span class="text-[11px] text-slate-400">Creator Analytics</span></div>
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
+                        <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0284C7]">MO</div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Modash</span><span class="text-[11px] text-slate-500">Creator Analytics</span></div>
                     </div>
-                    <div class="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-3.5 backdrop-blur-md">
+                    <div class="flex items-center gap-3.5 rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-3.5 shadow-sm hover:border-blue-400 transition-colors">
                         <div class="flex h-9 w-9 items-center justify-center rounded-xl font-bold text-white text-sm bg-[#0079BF]">TR</div>
-                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-white">Trello</span><span class="text-[11px] text-slate-400">Human-in-the-Loop</span></div>
+                        <div class="flex flex-col text-left"><span class="text-sm font-bold text-slate-900">Trello</span><span class="text-[11px] text-slate-500">Human-in-the-Loop</span></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Features Section (replicates ravikatiyar/services-card & marketing-badges) -->
+        <!-- 5. Features Section (Crisp White Services Cards) -->
         <section id="features" class="relative py-28 px-4">
             <div class="mx-auto max-w-6xl">
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <div class="flex flex-wrap items-center justify-center gap-2.5 mb-4">
-                        <span class="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-[#174276]/30 px-3 py-1 text-xs font-semibold text-sky-200">
-                            <span class="h-1.5 w-1.5 rounded-full bg-sky-400"></span> AI-Powered
+                        <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                            <span class="h-1.5 w-1.5 rounded-full bg-blue-600"></span> AI-Powered
                         </span>
-                        <span class="inline-flex items-center gap-1.5 rounded-full border border-indigo-400/30 bg-indigo-900/30 px-3 py-1 text-xs font-semibold text-indigo-200">
-                            <span class="h-1.5 w-1.5 rounded-full bg-indigo-400"></span> Automated
+                        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                            <span class="h-1.5 w-1.5 rounded-full bg-slate-600"></span> Automated
                         </span>
-                        <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-950/40 px-3 py-1 text-xs font-semibold text-emerald-200">
-                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span> Scalable Ops
+                        <span class="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                            <span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span> Enterprise
                         </span>
                     </div>
 
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-5">
-                        Core Platform <span class="bg-gradient-to-r from-sky-400 to-[#60a5fa] bg-clip-text text-transparent">Features</span>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] mb-5">
+                        Core Platform <span class="text-blue-600">Features</span>
                     </h2>
-                    <p class="text-base sm:text-lg text-slate-300">
+                    <p class="text-base sm:text-lg text-slate-600">
                         Four modular engines engineered to replace manual content bottlenecks with 24/7 autonomous software pipelines.
                     </p>
                 </div>
@@ -343,108 +362,108 @@
                 <!-- 4 Services Cards Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                     <!-- Card 1 -->
-                    <div class="card-spotlight group rounded-2xl border border-white/10 bg-[#0A2342]/40 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_20px_50px_rgba(23,66,118,0.35)]">
+                    <div class="card-spotlight group rounded-2xl border border-slate-200/80 p-8">
                         <div class="flex items-center justify-between mb-5">
-                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#174276] to-[#0A2342] border border-sky-400/30 text-sky-300 shadow-[0_0_20px_rgba(56,189,248,0.2)]">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
                                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
                             </div>
-                            <span class="rounded-full border border-sky-400/20 bg-sky-950/40 px-3 py-1 text-[11px] font-semibold tracking-wider text-sky-300 uppercase">Autonomous Ops</span>
+                            <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold tracking-wider text-blue-700 uppercase">Autonomous Ops</span>
                         </div>
-                        <h3 class="text-xl font-bold tracking-tight text-white group-hover:text-sky-300 transition-colors mb-2.5">
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
                             1. AI Social Media Automation
                         </h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-5">
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
                             Automated posting, intelligent scheduling, and conversational engagement powered by real-time trend signals and Claude's deep language reasoning.
                         </p>
-                        <ul class="space-y-2 mb-6 border-t border-white/10 pt-4 text-xs text-slate-300">
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Real-time social firehose trend ingestion</li>
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Context-aware script &amp; caption synthesis</li>
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Make.com webhook sync across all channels</li>
+                        <ul class="space-y-2 mb-6 border-t border-slate-100 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Real-time social firehose trend ingestion</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Context-aware script &amp; caption synthesis</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Make.com webhook sync across all channels</li>
                         </ul>
-                        <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-slate-400">
-                            <span>Powered by <strong class="text-slate-200">Claude API + Make.com</strong></span>
-                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-slate-300 group-hover:bg-[#174276] group-hover:text-white transition-colors">
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                            <span>Powered by <strong class="text-slate-800">Claude API + Make.com</strong></span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="card-spotlight group rounded-2xl border border-white/10 bg-[#0A2342]/40 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_20px_50px_rgba(23,66,118,0.35)]">
+                    <div class="card-spotlight group rounded-2xl border border-slate-200/80 p-8">
                         <div class="flex items-center justify-between mb-5">
-                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#174276] to-[#0A2342] border border-sky-400/30 text-sky-300 shadow-[0_0_20px_rgba(56,189,248,0.2)]">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
                                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
                             </div>
-                            <span class="rounded-full border border-sky-400/20 bg-sky-950/40 px-3 py-1 text-[11px] font-semibold tracking-wider text-sky-300 uppercase">Conversion Engine</span>
+                            <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold tracking-wider text-blue-700 uppercase">Conversion Engine</span>
                         </div>
-                        <h3 class="text-xl font-bold tracking-tight text-white group-hover:text-sky-300 transition-colors mb-2.5">
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
                             2. Data-Driven Ad Generation
                         </h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-5">
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
                             Generate multi-variant high-performing ad copy and localized creative angles automatically tuned to audience demographics and conversion targets.
                         </p>
-                        <ul class="space-y-2 mb-6 border-t border-white/10 pt-4 text-xs text-slate-300">
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Predictive viral hook scoring algorithm</li>
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Automated A/B creative permutation matrix</li>
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Modash influencer demographic matching</li>
+                        <ul class="space-y-2 mb-6 border-t border-slate-100 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Predictive viral hook scoring algorithm</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Automated A/B creative permutation matrix</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Modash influencer demographic matching</li>
                         </ul>
-                        <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-slate-400">
-                            <span>Powered by <strong class="text-slate-200">AI + Modash Analytics</strong></span>
-                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-slate-300 group-hover:bg-[#174276] group-hover:text-white transition-colors">
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                            <span>Powered by <strong class="text-slate-800">AI + Modash Analytics</strong></span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="card-spotlight group rounded-2xl border border-white/10 bg-[#0A2342]/40 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_20px_50px_rgba(23,66,118,0.35)]">
+                    <div class="card-spotlight group rounded-2xl border border-slate-200/80 p-8">
                         <div class="flex items-center justify-between mb-5">
-                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#174276] to-[#0A2342] border border-sky-400/30 text-sky-300 shadow-[0_0_20px_rgba(56,189,248,0.2)]">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
                                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2Z"/></svg>
                             </div>
-                            <span class="rounded-full border border-sky-400/20 bg-sky-950/40 px-3 py-1 text-[11px] font-semibold tracking-wider text-sky-300 uppercase">Generative Media</span>
+                            <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold tracking-wider text-blue-700 uppercase">Generative Media</span>
                         </div>
-                        <h3 class="text-xl font-bold tracking-tight text-white group-hover:text-sky-300 transition-colors mb-2.5">
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
                             3. Generative Visual Workflows
                         </h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-5">
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
                             From raw briefs to finished video assets. Generative concepting, brand-consistent visual styling, and synchronized ElevenLabs AI voiceovers.
                         </p>
-                        <ul class="space-y-2 mb-6 border-t border-white/10 pt-4 text-xs text-slate-300">
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> High-fidelity voice synthesis &amp; cloning</li>
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Dynamic video storyboard generation</li>
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Brand style guide preservation filters</li>
+                        <ul class="space-y-2 mb-6 border-t border-slate-100 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> High-fidelity voice synthesis &amp; cloning</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Dynamic video storyboard generation</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Brand style guide preservation filters</li>
                         </ul>
-                        <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-slate-400">
-                            <span>Powered by <strong class="text-slate-200">ElevenLabs + GenAI</strong></span>
-                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-slate-300 group-hover:bg-[#174276] group-hover:text-white transition-colors">
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                            <span>Powered by <strong class="text-slate-800">ElevenLabs + GenAI</strong></span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="card-spotlight group rounded-2xl border border-white/10 bg-[#0A2342]/40 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_20px_50px_rgba(23,66,118,0.35)]">
+                    <div class="card-spotlight group rounded-2xl border border-slate-200/80 p-8">
                         <div class="flex items-center justify-between mb-5">
-                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#174276] to-[#0A2342] border border-sky-400/30 text-sky-300 shadow-[0_0_20px_rgba(56,189,248,0.2)]">
+                            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 border border-blue-100 text-blue-600">
                                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12c5-5 5 5 10 0s5 5 10 0"/><path d="M2 18c5-5 5 5 10 0s5 5 10 0"/></svg>
                             </div>
-                            <span class="rounded-full border border-sky-400/20 bg-sky-950/40 px-3 py-1 text-[11px] font-semibold tracking-wider text-sky-300 uppercase">Living Model</span>
+                            <span class="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] font-semibold tracking-wider text-blue-700 uppercase">Living Model</span>
                         </div>
-                        <h3 class="text-xl font-bold tracking-tight text-white group-hover:text-sky-300 transition-colors mb-2.5">
+                        <h3 class="text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors mb-2.5">
                             4. Brand DNA Analysis via AI
                         </h3>
-                        <p class="text-sm text-slate-300 leading-relaxed mb-5">
+                        <p class="text-sm text-slate-600 leading-relaxed mb-5">
                             Deep semantic analysis of your brand voice, visual aesthetics, and audience sentiment to build a living neural model that adapts with every campaign.
                         </p>
-                        <ul class="space-y-2 mb-6 border-t border-white/10 pt-4 text-xs text-slate-300">
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Tone-of-voice alignment scoring</li>
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Audience resonance vector tracking</li>
-                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-sky-400"></div> Zero-drift brand guardrails</li>
+                        <ul class="space-y-2 mb-6 border-t border-slate-100 pt-4 text-xs text-slate-600">
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Tone-of-voice alignment scoring</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Audience resonance vector tracking</li>
+                            <li class="flex items-center gap-2"><div class="h-1.5 w-1.5 rounded-full bg-blue-600"></div> Zero-drift brand guardrails</li>
                         </ul>
-                        <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-slate-400">
-                            <span>Powered by <strong class="text-slate-200">Neural Embeddings</strong></span>
-                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-slate-300 group-hover:bg-[#174276] group-hover:text-white transition-colors">
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-xs text-slate-500">
+                            <span>Powered by <strong class="text-slate-800">Neural Embeddings</strong></span>
+                            <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                             </div>
                         </div>
@@ -454,78 +473,78 @@
         </section>
 
         <!-- 6. The Automation Pipeline & Stats -->
-        <section id="pipeline" class="relative py-28 px-4 border-t border-white/10 bg-[#061325]/50">
+        <section id="pipeline" class="relative py-28 px-4 border-t border-slate-200 bg-white">
             <div class="mx-auto max-w-6xl">
                 <div class="text-center max-w-3xl mx-auto mb-20">
-                    <span class="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-[#174276]/30 px-3 py-1 text-xs font-semibold text-sky-200 mb-4">
+                    <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 mb-4">
                         Software Workflow
                     </span>
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-5">
-                        The Automation <span class="bg-gradient-to-r from-sky-400 to-[#60a5fa] bg-clip-text text-transparent">Pipeline</span>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] mb-5">
+                        The Automation <span class="text-blue-600">Pipeline</span>
                     </h2>
-                    <p class="text-base sm:text-lg text-slate-300">
+                    <p class="text-base sm:text-lg text-slate-600">
                         Four synchronized execution layers orchestrating content from raw market data to live published posts.
                     </p>
                 </div>
 
                 <!-- 4 Steps -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-                    <div class="rounded-2xl border border-white/10 bg-[#0A2342]/50 p-8 backdrop-blur-xl">
-                        <span class="text-xs font-mono font-bold text-sky-400">PHASE 01</span>
-                        <h3 class="text-2xl font-bold text-white mt-1 mb-3">Data Discovery</h3>
-                        <p class="text-sm text-slate-300 mb-5">Automated pipelines continuously ingest trend signals, keyword volume surges, and competitor actions to extract high-leverage content opportunities.</p>
-                        <div class="text-xs text-sky-300 font-mono bg-[#061325] p-3 rounded-xl border border-white/5">
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50/50 p-8">
+                        <span class="text-xs font-mono font-bold text-blue-600">PHASE 01</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-3">Data Discovery</h3>
+                        <p class="text-sm text-slate-600 mb-5 leading-relaxed">Automated pipelines continuously ingest trend signals, keyword volume surges, and competitor actions to extract high-leverage content opportunities.</p>
+                        <div class="text-xs text-slate-700 font-mono bg-white p-3 rounded-xl border border-slate-200">
                             &gt; Ingesting trends across 12 social endpoints via Modash API
                         </div>
                     </div>
 
-                    <div class="rounded-2xl border border-white/10 bg-[#0A2342]/50 p-8 backdrop-blur-xl">
-                        <span class="text-xs font-mono font-bold text-sky-400">PHASE 02</span>
-                        <h3 class="text-2xl font-bold text-white mt-1 mb-3">Content Generation</h3>
-                        <p class="text-sm text-slate-300 mb-5">Claude API crafts audience-tailored video scripts, hooks, and captions. ElevenLabs generates human-quality voiceovers in parallel.</p>
-                        <div class="text-xs text-sky-300 font-mono bg-[#061325] p-3 rounded-xl border border-white/5">
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50/50 p-8">
+                        <span class="text-xs font-mono font-bold text-blue-600">PHASE 02</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-3">Content Generation</h3>
+                        <p class="text-sm text-slate-600 mb-5 leading-relaxed">Claude API crafts audience-tailored video scripts, hooks, and captions. ElevenLabs generates human-quality voiceovers in parallel.</p>
+                        <div class="text-xs text-slate-700 font-mono bg-white p-3 rounded-xl border border-slate-200">
                             &gt; Claude 3.5 synthesis + ElevenLabs voice cloning triggered
                         </div>
                     </div>
 
-                    <div class="rounded-2xl border border-white/10 bg-[#0A2342]/50 p-8 backdrop-blur-xl">
-                        <span class="text-xs font-mono font-bold text-sky-400">PHASE 03</span>
-                        <h3 class="text-2xl font-bold text-white mt-1 mb-3">Automated Launch</h3>
-                        <p class="text-sm text-slate-300 mb-5">Everything syncs to your team&apos;s Trello boards for quick review. Once approved, Make.com schedules and publishes to TikTok, Instagram, and LinkedIn.</p>
-                        <div class="text-xs text-sky-300 font-mono bg-[#061325] p-3 rounded-xl border border-white/5">
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50/50 p-8">
+                        <span class="text-xs font-mono font-bold text-blue-600">PHASE 03</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-3">Automated Launch</h3>
+                        <p class="text-sm text-slate-600 mb-5 leading-relaxed">Everything syncs to your team&apos;s Trello boards for quick review. Once approved, Make.com schedules and publishes to TikTok, Instagram, and LinkedIn.</p>
+                        <div class="text-xs text-slate-700 font-mono bg-white p-3 rounded-xl border border-slate-200">
                             &gt; Card queued in Trello &middot; Make.com multi-publish scenario ready
                         </div>
                     </div>
 
-                    <div class="rounded-2xl border border-white/10 bg-[#0A2342]/50 p-8 backdrop-blur-xl">
-                        <span class="text-xs font-mono font-bold text-sky-400">PHASE 04</span>
-                        <h3 class="text-2xl font-bold text-white mt-1 mb-3">Performance Analytics &amp; ML</h3>
-                        <p class="text-sm text-slate-300 mb-5">Real-time performance feedback updates neural weights to optimize future content generation and maximize viral reach.</p>
-                        <div class="text-xs text-sky-300 font-mono bg-[#061325] p-3 rounded-xl border border-white/5">
+                    <div class="rounded-2xl border border-slate-200 bg-slate-50/50 p-8">
+                        <span class="text-xs font-mono font-bold text-blue-600">PHASE 04</span>
+                        <h3 class="text-2xl font-bold text-slate-900 mt-1 mb-3">Performance Analytics &amp; ML</h3>
+                        <p class="text-sm text-slate-600 mb-5 leading-relaxed">Real-time performance feedback updates neural weights to optimize future content generation and maximize viral reach.</p>
+                        <div class="text-xs text-slate-700 font-mono bg-white p-3 rounded-xl border border-slate-200">
                             &gt; Continuous feedback loop retraining prompt models
                         </div>
                     </div>
                 </div>
 
                 <!-- Stats by the Numbers -->
-                <div class="rounded-2xl border border-white/10 bg-gradient-to-r from-[#0A2342]/70 via-[#174276]/40 to-[#0A2342]/70 p-8 sm:p-12 backdrop-blur-2xl shadow-2xl">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+                <div class="rounded-2xl border border-slate-200 bg-slate-50 p-8 sm:p-12 shadow-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-slate-200">
                         <div class="pt-4 md:pt-0">
-                            <div class="text-5xl font-black text-white">50<span class="text-sky-400">+</span></div>
-                            <div class="text-sm font-semibold uppercase tracking-wider text-slate-300 mt-2">Automated Workflows</div>
-                            <p class="text-xs text-slate-400 mt-1">Active 24/7 client pipelines</p>
+                            <div class="text-5xl font-black text-slate-900">50<span class="text-blue-600">+</span></div>
+                            <div class="text-sm font-semibold uppercase tracking-wider text-slate-600 mt-2">Automated Workflows</div>
+                            <p class="text-xs text-slate-500 mt-1">Active 24/7 client pipelines</p>
                         </div>
                         <div class="pt-6 md:pt-0">
-                            <div class="text-5xl font-black text-white">10K<span class="text-sky-400">+</span></div>
-                            <div class="text-sm font-semibold uppercase tracking-wider text-slate-300 mt-2">AI-Generated Assets</div>
-                            <p class="text-xs text-slate-400 mt-1">Scripts, voiceovers &amp; creatives</p>
+                            <div class="text-5xl font-black text-slate-900">10K<span class="text-blue-600">+</span></div>
+                            <div class="text-sm font-semibold uppercase tracking-wider text-slate-600 mt-2">AI-Generated Assets</div>
+                            <p class="text-xs text-slate-500 mt-1">Scripts, voiceovers &amp; creatives</p>
                         </div>
                         <div class="pt-6 md:pt-0">
-                            <div class="text-5xl font-black text-white flex items-center justify-center">
-                                <span class="text-sky-400 text-6xl">&infin;</span>
+                            <div class="text-5xl font-black text-slate-900 flex items-center justify-center">
+                                <span class="text-blue-600 text-6xl">&infin;</span>
                             </div>
-                            <div class="text-sm font-semibold uppercase tracking-wider text-slate-300 mt-2">Hours Saved</div>
-                            <p class="text-xs text-slate-400 mt-1">Eliminating agency friction</p>
+                            <div class="text-sm font-semibold uppercase tracking-wider text-slate-600 mt-2">Hours Saved</div>
+                            <p class="text-xs text-slate-500 mt-1">Eliminating agency friction</p>
                         </div>
                     </div>
                 </div>
@@ -533,46 +552,46 @@
         </section>
 
         <!-- 7. About Section & Founders -->
-        <section id="about" class="relative py-28 px-4">
+        <section id="about" class="relative py-28 px-4 bg-[#F8FAFC]">
             <div class="mx-auto max-w-6xl">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24">
                     <div class="lg:col-span-7 space-y-6">
-                        <span class="inline-flex items-center gap-1.5 rounded-full border border-sky-400/30 bg-[#174276]/30 px-3 py-1 text-xs font-semibold text-sky-200">
+                        <span class="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
                             Platform Vision
                         </span>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                            Blending Marketing Strategy with <span class="bg-gradient-to-r from-sky-400 to-[#60a5fa] bg-clip-text text-transparent">Advanced Artificial Intelligence</span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] leading-tight">
+                            Blending Marketing Strategy with <span class="text-blue-600">Advanced Artificial Intelligence</span>
                         </h2>
-                        <p class="text-base text-slate-300 leading-relaxed">
+                        <p class="text-base text-slate-600 leading-relaxed">
                             tbtsocial was built to bridge the gap between creative storytelling and algorithmic efficiency. Instead of running disjointed agency services, we engineer software platforms that automate the entire content lifecycle.
                         </p>
                     </div>
 
                     <!-- Founders Box -->
                     <div class="lg:col-span-5">
-                        <div class="rounded-2xl border border-white/10 bg-[#0A2342]/60 p-6 backdrop-blur-xl shadow-2xl space-y-4">
-                            <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                                <span class="text-xs uppercase tracking-widest text-sky-300 font-semibold">Leadership &amp; Architecture</span>
+                        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                                <span class="text-xs uppercase tracking-widest text-blue-700 font-bold">Leadership &amp; Architecture</span>
                                 <span class="text-xs font-mono text-slate-400">tbtsocial</span>
                             </div>
                             <!-- Burak Fidan -->
-                            <div class="flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.03] p-4">
-                                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#174276] to-[#0A2342] text-base font-bold text-white border border-sky-400/30">
+                            <div class="flex items-center gap-4 rounded-xl border border-slate-100 bg-slate-50/70 p-4">
+                                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0F172A] text-base font-bold text-white shadow-sm">
                                     BF
                                 </div>
                                 <div>
-                                    <div class="text-base font-bold text-white">Burak Fidan</div>
-                                    <div class="text-xs text-sky-300">Co-founder &amp; Platform Architect</div>
+                                    <div class="text-base font-bold text-slate-900">Burak Fidan</div>
+                                    <div class="text-xs text-blue-600 font-medium">Co-founder &amp; Platform Architect</div>
                                 </div>
                             </div>
                             <!-- Taha Mis -->
-                            <div class="flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.03] p-4">
-                                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#0f315a] to-[#0A2342] text-base font-bold text-white border border-sky-400/30">
+                            <div class="flex items-center gap-4 rounded-xl border border-slate-100 bg-slate-50/70 p-4">
+                                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-base font-bold text-white shadow-sm">
                                     TM
                                 </div>
                                 <div>
-                                    <div class="text-base font-bold text-white">Taha Mis</div>
-                                    <div class="text-xs text-sky-300">Co-founder &amp; Operations</div>
+                                    <div class="text-base font-bold text-slate-900">Taha Mis</div>
+                                    <div class="text-xs text-blue-600 font-medium">Co-founder &amp; Operations</div>
                                 </div>
                             </div>
                         </div>
@@ -581,44 +600,44 @@
 
                 <!-- FAQ Section -->
                 <div class="max-w-3xl mx-auto">
-                    <h3 class="text-3xl font-extrabold text-white text-center mb-8">Frequently Asked Questions</h3>
+                    <h3 class="text-3xl font-black text-slate-900 text-center mb-8">Frequently Asked Questions</h3>
                     <div class="space-y-4">
-                        <div class="rounded-xl border border-white/10 bg-[#0A2342]/40 p-5 backdrop-blur-md">
-                            <h4 class="font-semibold text-white mb-2">How does the AI platform work?</h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Our engine connects real-time trend feeds to the Claude API. It drafts brand-aligned scripts, triggers ElevenLabs for AI voiceovers, and syncs approval cards to Trello before publishing via Make.com.</p>
+                        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                            <h4 class="font-bold text-slate-900 mb-2">How does the AI platform work?</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">Our engine connects real-time trend feeds to the Claude API. It drafts brand-aligned scripts, triggers ElevenLabs for AI voiceovers, and syncs approval cards to Trello before publishing via Make.com.</p>
                         </div>
-                        <div class="rounded-xl border border-white/10 bg-[#0A2342]/40 p-5 backdrop-blur-md">
-                            <h4 class="font-semibold text-white mb-2">Can I connect our custom agency tech stack via API?</h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">Yes. tbtsocial provides full REST endpoints, webhook triggers, and 1,500+ pre-built Make.com integrations so you can seamlessly link your CRM, Slack, and publishing channels.</p>
+                        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                            <h4 class="font-bold text-slate-900 mb-2">Can I connect our custom agency tech stack via API?</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">Yes. tbtsocial provides full REST endpoints, webhook triggers, and 1,500+ pre-built Make.com integrations so you can seamlessly link your CRM, Slack, and publishing channels.</p>
                         </div>
-                        <div class="rounded-xl border border-white/10 bg-[#0A2342]/40 p-5 backdrop-blur-md">
-                            <h4 class="font-semibold text-white mb-2">What are the SaaS retainer and subscription models?</h4>
-                            <p class="text-sm text-slate-300 leading-relaxed">We provide flexible monthly SaaS retainers scaled to your monthly pipeline volume. From boutique agencies managing 5 pipelines to enterprise teams running autonomous multi-brand operations.</p>
+                        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                            <h4 class="font-bold text-slate-900 mb-2">What are the SaaS retainer and subscription models?</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">We provide flexible monthly SaaS retainers scaled to your monthly pipeline volume. From boutique agencies managing 5 pipelines to enterprise teams running autonomous multi-brand operations.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 8. Hover Footer (replicates nurui/hover-footer) -->
-        <footer id="contact" class="relative overflow-hidden border-t border-white/10 bg-[#061325] pt-24 pb-36 text-white">
+        <!-- 8. Hover Footer (Crisp Light Mode Style) -->
+        <footer id="contact" class="relative overflow-hidden border-t border-slate-200 bg-white pt-24 pb-36 text-slate-900">
             <div id="footerSpotlight" class="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-300"></div>
 
             <!-- Massive Background Backdrop -->
             <div class="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 select-none z-0">
-                <span class="text-[14vw] font-black tracking-tighter text-white/[0.03]">TBTSOCIAL</span>
+                <span class="text-[14vw] font-black tracking-tighter text-slate-100">TBTSOCIAL</span>
             </div>
 
             <div class="relative z-10 mx-auto max-w-6xl px-6">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
                     <div class="md:col-span-5 space-y-4">
                         <div class="flex items-center gap-2">
-                            <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#174276] text-white shadow-[0_0_20px_rgba(56,189,248,0.3)]">
-                                <svg class="h-5 w-5 text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                            <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#0F172A] text-white">
+                                <svg class="h-5 w-5 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
                             </div>
-                            <span class="text-xl font-bold tracking-tight text-white">tbtsocial<span class="text-sky-400">.</span></span>
+                            <span class="text-xl font-bold tracking-tight text-slate-900">tbtsocial<span class="text-blue-600">.</span></span>
                         </div>
-                        <p class="text-sm text-slate-300 max-w-sm leading-relaxed">
+                        <p class="text-sm text-slate-600 max-w-sm leading-relaxed">
                             The AI-Native Content Operations and Automation Platform for high-growth digital agencies and modern marketing teams.
                         </p>
                     </div>
@@ -626,42 +645,42 @@
                     <div class="md:col-span-2 space-y-3">
                         <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Navigation</h4>
                         <ul class="space-y-2.5 text-sm">
-                            <li><a href="#features" class="css-link-hover text-white">Features</a></li>
-                            <li><a href="#pipeline" class="css-link-hover text-white">The Pipeline</a></li>
-                            <li><a href="#integrations" class="css-link-hover text-white">Integrations</a></li>
-                            <li><a href="https://cal.com/tbtsocial/30min" target="_blank" class="css-link-hover text-white">Request API</a></li>
+                            <li><a href="#features" class="css-link-hover text-slate-700 font-medium">Features</a></li>
+                            <li><a href="#pipeline" class="css-link-hover text-slate-700 font-medium">The Pipeline</a></li>
+                            <li><a href="#integrations" class="css-link-hover text-slate-700 font-medium">Integrations</a></li>
+                            <li><a href="https://cal.com/tbtsocial/30min" target="_blank" class="css-link-hover text-slate-700 font-medium">Request API</a></li>
                         </ul>
                     </div>
 
                     <div class="md:col-span-2 space-y-3">
                         <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Direct Contact</h4>
-                        <ul class="space-y-2.5 text-sm text-slate-300">
-                            <li><a href="tel:05340637353" class="hover:text-sky-300 transition-colors">0534 063 73 53</a></li>
-                            <li><a href="mailto:contact@socialtbt.com.tr" class="hover:text-sky-300 transition-colors">contact@socialtbt.com.tr</a></li>
-                            <li><a href="https://wa.me/905340637353" target="_blank" class="css-link-hover text-white">WhatsApp Direct</a></li>
+                        <ul class="space-y-2.5 text-sm text-slate-700">
+                            <li><a href="tel:05340637353" class="hover:text-blue-600 transition-colors">0534 063 73 53</a></li>
+                            <li><a href="mailto:contact@socialtbt.com.tr" class="hover:text-blue-600 transition-colors">contact@socialtbt.com.tr</a></li>
+                            <li><a href="https://wa.me/905340637353" target="_blank" class="css-link-hover text-blue-600 font-semibold">WhatsApp Direct</a></li>
                         </ul>
                     </div>
 
                     <div class="md:col-span-3 space-y-3">
                         <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400">Founders</h4>
                         <div class="space-y-2 text-sm">
-                            <div class="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-                                <div class="font-semibold text-white">Burak Fidan</div>
-                                <div class="text-xs text-slate-400">Co-founder &amp; Growth</div>
+                            <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                                <div class="font-semibold text-slate-900">Burak Fidan</div>
+                                <div class="text-xs text-slate-500">Co-founder &amp; Growth</div>
                             </div>
-                            <div class="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-                                <div class="font-semibold text-white">Taha Mis</div>
-                                <div class="text-xs text-slate-400">Co-founder &amp; Operations</div>
+                            <div class="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                                <div class="font-semibold text-slate-900">Taha Mis</div>
+                                <div class="text-xs text-slate-500">Co-founder &amp; Operations</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-slate-400">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-8 text-xs text-slate-500">
                     <div>&copy; 2026 tbtsocial. All Rights Reserved.</div>
                     <div class="flex items-center gap-6">
-                        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
-                        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                        <a href="#" class="hover:text-slate-900 transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-slate-900 transition-colors">Terms of Service</a>
                     </div>
                 </div>
             </div>
@@ -669,22 +688,22 @@
 
     </main>
 
-    <!-- 9. Floating Dock (replicates uimix/dock with spring magnification) -->
+    <!-- 9. Floating Dock (Apple / Framer Crisp Light Mode Pill) -->
     <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
-        <nav id="floatingDock" class="flex items-end gap-3 rounded-3xl border border-white/15 bg-[#0A2342]/80 px-4 py-3 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
-            <a href="#hero" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-md border border-white/20 hover:bg-[#174276] hover:border-sky-400 shadow-lg">
+        <nav id="floatingDock" class="flex items-end gap-3 rounded-3xl border border-slate-200/90 bg-white/90 px-4 py-3 backdrop-blur-2xl shadow-[0_12px_40px_rgba(15,23,42,0.12)]">
+            <a href="#hero" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
             </a>
-            <a href="#features" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-md border border-white/20 hover:bg-[#174276] hover:border-sky-400 shadow-lg">
+            <a href="#features" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
             </a>
-            <a href="#hero" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-md border border-white/20 hover:bg-[#174276] hover:border-sky-400 shadow-lg">
-                <svg class="h-5 w-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg>
+            <a href="#hero" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-blue-600 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/></svg>
             </a>
-            <a href="#pipeline" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-md border border-white/20 hover:bg-[#174276] hover:border-sky-400 shadow-lg">
+            <a href="#pipeline" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>
             </a>
-            <a href="#contact" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-md border border-white/20 hover:bg-[#174276] hover:border-sky-400 shadow-lg">
+            <a href="#contact" class="dock-item relative flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700 border border-slate-200 hover:bg-blue-600 hover:text-white hover:border-blue-600 shadow-sm">
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             </a>
         </nav>
@@ -692,7 +711,7 @@
 
     <!-- Scripts for Canvas Wave, Limelight Nav, Spotlight Card, and Download Button -->
     <script>
-        // 1. Wave Background (Canvas Shader)
+        // 1. Wave Background (Light Mode Porcelain & Subtle Blue Flow)
         (function() {
             const canvas = document.getElementById('waveCanvas');
             const ctx = canvas.getContext('2d');
@@ -712,34 +731,34 @@
 
             function render() {
                 step += 0.012;
-                ctx.fillStyle = '#061325';
+                ctx.fillStyle = '#F8FAFC';
                 ctx.fillRect(0, 0, width, height);
 
-                // Bloom gradient
+                // Subtle Radial Gradient
                 const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, Math.max(width, height)*0.55);
-                grad.addColorStop(0, 'rgba(23, 66, 118, 0.35)');
-                grad.addColorStop(0.5, 'rgba(10, 35, 66, 0.18)');
-                grad.addColorStop(1, 'rgba(6, 19, 37, 0)');
+                grad.addColorStop(0, 'rgba(37, 99, 235, 0.05)');
+                grad.addColorStop(0.5, 'rgba(219, 234, 254, 0.03)');
+                grad.addColorStop(1, 'rgba(248, 250, 252, 0)');
                 ctx.fillStyle = grad;
                 ctx.fillRect(0, 0, width, height);
 
                 // Wave ribbons
-                for (let i = 0; i < 7; i++) {
+                for (let i = 0; i < 6; i++) {
                     ctx.beginPath();
-                    const baseHeight = height * 0.55 + i * 28;
-                    const amp = 35 + i * 12;
-                    const freq = 0.0018 + i * 0.0004;
+                    const baseHeight = height * 0.58 + i * 26;
+                    const amp = 30 + i * 10;
+                    const freq = 0.0018 + i * 0.0003;
                     const phase = step * (0.8 + i * 0.2);
 
                     for (let x = 0; x <= width; x += 6) {
                         const dist = Math.abs(x - mouse.x);
-                        const lift = Math.max(0, 1 - dist/500) * 20;
+                        const lift = Math.max(0, 1 - dist/500) * 16;
                         const y = baseHeight + Math.sin(x * freq + phase) * amp + Math.cos(x * 0.001 - phase * 0.5) * (amp * 0.6) - lift;
                         if (x === 0) ctx.moveTo(x, y);
                         else ctx.lineTo(x, y);
                     }
-                    ctx.strokeStyle = i % 2 === 0 ? 'rgba(23, 66, 118, 0.45)' : 'rgba(56, 189, 248, 0.25)';
-                    ctx.lineWidth = i === 3 ? 2 : 1.2;
+                    ctx.strokeStyle = i % 2 === 0 ? 'rgba(37, 99, 235, 0.12)' : 'rgba(148, 163, 184, 0.15)';
+                    ctx.lineWidth = i === 2 ? 1.5 : 1;
                     ctx.stroke();
                 }
                 requestAnimationFrame(render);
@@ -779,19 +798,19 @@
                 if (running) return;
                 running = true;
                 let pct = 0;
-                content.innerHTML = `<svg class="animate-spin h-4 w-4 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg><span>Connecting Pipelines...</span>`;
+                content.innerHTML = `<svg class="animate-spin h-4 w-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg><span>Connecting Pipelines...</span>`;
 
                 const iv = setInterval(() => {
                     pct += 15;
                     progress.style.width = pct + '%';
                     if (pct >= 100) {
                         clearInterval(iv);
-                        content.innerHTML = `<span class="flex items-center gap-2 text-emerald-300 font-semibold"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Pipeline Connected!</span>`;
+                        content.innerHTML = `<span class="flex items-center gap-2 text-white font-semibold"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Pipeline Connected!</span>`;
                         setTimeout(() => {
                             window.open('https://cal.com/tbtsocial/30min', '_blank');
                             running = false;
                             progress.style.width = '0%';
-                            content.innerHTML = `<svg class="h-4 w-4 text-sky-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg><span>Request API Access</span><svg class="h-4 w-4 text-sky-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg>`;
+                            content.innerHTML = `<svg class="h-4 w-4 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg><span>Request API Access</span><svg class="h-4 w-4 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 17V3"/><path d="m6 11 6 6 6-6"/><path d="M19 21H5"/></svg>`;
                         }, 1600);
                     }
                 }, 120);
@@ -816,7 +835,7 @@
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 footerSpot.style.opacity = '1';
-                footerSpot.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(23, 66, 118, 0.4), transparent 75%)`;
+                footerSpot.style.background = `radial-gradient(500px circle at ${x}px ${y}px, rgba(37, 99, 235, 0.08), transparent 70%)`;
             });
             footer.addEventListener('mouseleave', () => {
                 footerSpot.style.opacity = '0';
@@ -832,8 +851,8 @@
                 const itemCenter = rect.left + rect.width / 2;
                 const dist = Math.abs(e.clientX - itemCenter);
                 if (dist < 120) {
-                    const scale = 1 + (1 - dist / 120) * 0.45;
-                    item.style.transform = `scale(${scale}) translateY(-${(scale - 1) * 12}px)`;
+                    const scale = 1 + (1 - dist / 120) * 0.35;
+                    item.style.transform = `scale(${scale}) translateY(-${(scale - 1) * 10}px)`;
                 } else {
                     item.style.transform = 'scale(1) translateY(0)';
                 }
@@ -851,18 +870,18 @@
             const content = document.getElementById('tabContent');
             tabs.forEach((t, i) => {
                 if (i === num - 1) {
-                    t.className = "rounded-xl border border-sky-400/60 bg-sky-950/40 p-3.5 text-left transition-all";
+                    t.className = "rounded-xl border border-blue-600/30 bg-blue-50/60 p-3.5 text-left transition-all";
                 } else {
-                    t.className = "rounded-xl border border-white/5 bg-white/[0.02] p-3.5 text-left transition-all hover:bg-white/[0.05]";
+                    t.className = "rounded-xl border border-slate-200 bg-slate-50/50 p-3.5 text-left transition-all hover:bg-slate-100/50";
                 }
             });
 
             if (num === 1) {
-                content.innerHTML = `<span class="text-sky-400">&gt; GET /api/v2/trends</span><p class="mt-1 text-slate-400">Modash &amp; Social Firehose scanned: Surge in #FinTechAI (+340% velocity).</p><div class="mt-2 text-emerald-400">[SUCCESS] Data normalized &amp; dispatched to Claude prompt engine.</div>`;
+                content.innerHTML = `<span class="text-blue-400">&gt; GET /api/v2/trends</span><p class="mt-1 text-slate-300">Modash &amp; Social Firehose scanned: Surge in #FinTechAI (+340% velocity).</p><div class="mt-2 text-emerald-400">[SUCCESS] Data normalized &amp; dispatched to Claude prompt engine.</div>`;
             } else if (num === 2) {
-                content.innerHTML = `<span class="text-sky-400">&gt; POST /anthropic/claude-3-5/generate</span><p class="mt-1 text-slate-400">"Why 90% of SaaS founders are switching to autonomous content queues in 2026..."</p><div class="mt-2 text-emerald-400">[SUCCESS] 3 localized hook variants generated (TikTok, Reels, LinkedIn).</div>`;
+                content.innerHTML = `<span class="text-blue-400">&gt; POST /anthropic/claude-3-5/generate</span><p class="mt-1 text-slate-300">"Why 90% of SaaS founders are switching to autonomous content queues in 2026..."</p><div class="mt-2 text-emerald-400">[SUCCESS] 3 localized hook variants generated (TikTok, Reels, LinkedIn).</div>`;
             } else if (num === 3) {
-                content.innerHTML = `<span class="text-sky-400">&gt; RUN make.com/scenario/publish-hook</span><p class="mt-1 text-slate-400">ElevenLabs cloned voice rendering completed (0.84s). Card created on Trello: "Weekly Review &mdash; High Priority".</p><div class="mt-2 text-emerald-400">[SUCCESS] Ready for 1-click human approval or autonomous scheduled dispatch.</div>`;
+                content.innerHTML = `<span class="text-blue-400">&gt; RUN make.com/scenario/publish-hook</span><p class="mt-1 text-slate-300">ElevenLabs cloned voice rendering completed (0.84s). Card created on Trello: "Weekly Review &mdash; High Priority".</p><div class="mt-2 text-emerald-400">[SUCCESS] Ready for 1-click human approval or autonomous scheduled dispatch.</div>`;
             }
         }
     </script>

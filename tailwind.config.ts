@@ -10,30 +10,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        navy: {
-          950: "#040c17",
-          900: "#061325",
-          800: "#0A2342", // Primary Brand Color
-          700: "#0f315a",
-          600: "#174276", // Accent Color
-          500: "#1f569b",
-          400: "#2d74cb",
-          300: "#60a5fa",
+        surface: {
+          DEFAULT: "#F8FAFC",
+          subtle: "#F1F5F9",
+          card: "#FFFFFF",
+          border: "#E2E8F0",
+          ink: "#0F172A",
+          muted: "#64748B",
+        },
+        cobalt: {
+          50: "#EFF6FF",
+          100: "#DBEAFE",
+          200: "#BFDBFE",
+          500: "#3B82F6",
+          600: "#2563EB", // Primary Accent
+          700: "#1D4ED8",
+          800: "#1E40AF",
         },
         primary: {
-          DEFAULT: "#0A2342",
+          DEFAULT: "#0F172A",
           foreground: "#FFFFFF",
         },
         accent: {
-          DEFAULT: "#174276",
+          DEFAULT: "#2563EB",
           foreground: "#FFFFFF",
-          glow: "#38BDF8",
-        },
-        surface: {
-          DEFAULT: "#F8F9FA",
-          dark: "rgba(10, 35, 66, 0.65)",
-          glass: "rgba(255, 255, 255, 0.05)",
-          border: "rgba(255, 255, 255, 0.12)",
+          glow: "#3B82F6",
         },
       },
       fontFamily: {
@@ -45,42 +46,13 @@ const config: Config = {
         xl: "24px",
       },
       keyframes: {
-        "shimmer-slide": {
-          to: {
-            transform: "translate(calc(100cqw - 100%), 0)",
-          },
-        },
-        "spin-around": {
-          "0%": {
-            transform: "translateZ(0) rotate(0)",
-          },
-          "15%, 35%": {
-            transform: "translateZ(0) rotate(90deg)",
-          },
-          "65%, 85%": {
-            transform: "translateZ(0) rotate(270deg)",
-          },
-          "100%": {
-            transform: "translateZ(0) rotate(360deg)",
-          },
-        },
         marquee: {
           from: { transform: "translateX(0%)" },
           to: { transform: "translateX(-50%)" },
         },
-        pulseGlow: {
-          "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
-          "50%": { opacity: "0.8", transform: "scale(1.05)" },
-        },
       },
       animation: {
-        "shimmer-slide": "shimmer-slide var(--speed) ease-in-out infinite alternate",
-        "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
-        marquee: "marquee 25s linear infinite",
-        "pulse-glow": "pulseGlow 4s ease-in-out infinite",
-      },
-      backgroundImage: {
-        "radial-gradient": "radial-gradient(circle at center, var(--tw-gradient-stops))",
+        marquee: "marquee 28s linear infinite",
       },
     },
   },
