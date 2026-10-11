@@ -133,7 +133,7 @@ export function HoverFooter() {
           {/* Column 4: Founders & Leadership */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400">
-              Founders &amp; Leadership
+              Founder
             </h4>
             <div className="space-y-3">
               <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-sm">
@@ -146,23 +146,7 @@ export function HoverFooter() {
                       Burak Fidan
                     </div>
                     <div className="text-xs text-slate-400">
-                      Co-founder &amp; Growth Architect
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-sm">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#0f315a] text-xs font-bold text-white">
-                    TM
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-white">
-                      Taha Mis
-                    </div>
-                    <div className="text-xs text-slate-400">
-                      Co-founder &amp; Operations
+                      Founder &amp; Growth Architect
                     </div>
                   </div>
                 </div>

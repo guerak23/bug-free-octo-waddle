@@ -73,21 +73,7 @@ export function AboutSection() {
                       Burak Fidan
                     </div>
                     <div className="text-xs text-sky-300">
-                      Co-founder &amp; Platform Architect
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 rounded-xl border border-white/5 bg-white/[0.03] p-4 transition-all hover:border-sky-400/30">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#0f315a] to-[#0A2342] text-base font-bold text-white border border-sky-400/30 shadow-md">
-                    TM
-                  </div>
-                  <div>
-                    <div className="text-base font-bold text-white">
-                      Taha Mis
-                    </div>
-                    <div className="text-xs text-sky-300">
-                      Co-founder &amp; Operations
+                      Founder &amp; Platform Architect
                     </div>
                   </div>
                 </div>
